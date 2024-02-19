@@ -233,7 +233,7 @@ const styles = StyleSheet.create({
         height: rpx(88),
         flexDirection: 'row',
         paddingLeft: rpx(24),
-        paddingRight: rpx(24+102),
+        paddingRight: rpx(24)+102,
         alignItems: 'center'
     },
     content: {

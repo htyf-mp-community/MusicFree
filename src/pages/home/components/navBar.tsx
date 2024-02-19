@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         width: '100%',
         height: rpx(88),
-        paddingRight: rpx(24+102),
+        paddingRight: rpx(24)+102,
     },
     searchBar: {
         marginHorizontal: rpx(24),

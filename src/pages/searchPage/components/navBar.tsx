@@ -102,7 +102,7 @@ export default function NavBar() {
 
 const style = StyleSheet.create({
     appbar: {
-        paddingRight: rpx(102),
+        paddingRight: 52,
     },
     button: {
         paddingHorizontal: rpx(24),
