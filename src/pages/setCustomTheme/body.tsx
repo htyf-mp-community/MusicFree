@@ -7,7 +7,7 @@ import {ImgAsset} from '@/constants/assetsConst';
 import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 import {launchImageLibrary} from 'react-native-image-picker';
 import pathConst from '@/constants/pathConst';
-import {copyFile} from 'react-native-fs';
+import {copyFile} from '@dr.pogodin/react-native-fs';
 import ImageColors from 'react-native-image-colors';
 import ThemeText from '@/components/base/themeText';
 import Slider from '@react-native-community/slider';

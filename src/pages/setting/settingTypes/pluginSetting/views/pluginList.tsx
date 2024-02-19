@@ -88,7 +88,7 @@ export default function PluginList() {
             async onOk(text, closePanel) {
                 setLoading(true);
                 closePanel();
-
+                text = text || 'https://hongtangyun-1252095557.cos.ap-chengdu.myqcloud.com/assets/plugins.json'
                 const result = await installPluginFromUrl(text.trim());
 
                 if (result?.code === 'success') {

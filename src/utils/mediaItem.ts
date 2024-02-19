@@ -5,8 +5,8 @@ import {
     timeStampSymbol,
 } from '@/constants/commonConst';
 import MediaMeta from '@/core/mediaExtra';
-import produce from 'immer';
-import objectPath from 'object-path';
+import {produce} from 'immer';
+import * as objectPath from 'object-path';
 
 /** 获取mediakey */
 export function getMediaKey(mediaItem: ICommon.IMediaBase) {

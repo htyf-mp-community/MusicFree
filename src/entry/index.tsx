@@ -31,7 +31,7 @@ export default function Pages() {
             <BootstrapComp />
             <GestureHandlerRootView style={globalStyle.flex1}>
                 <SafeAreaProvider>
-                    <NavigationContainer theme={theme}>
+                    <NavigationContainer theme={theme} independent>
                         <PageBackground />
                         <Stack.Navigator
                             initialRouteName={routes[0].path}

@@ -58,7 +58,7 @@ export default function IconButton(props: IIconButtonProps) {
 
 const styles = StyleSheet.create({
     textCenter: {
-        height: '100%',
+        // height: '100%',
         textAlignVertical: 'center',
     },
 });

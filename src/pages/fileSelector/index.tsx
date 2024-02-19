@@ -7,7 +7,7 @@ import {
     readDir,
     getAllExternalFilesDirs,
     exists,
-} from 'react-native-fs';
+} from '@dr.pogodin/react-native-fs';
 import {FlatList} from 'react-native-gesture-handler';
 import useColors from '@/hooks/useColors';
 import IconButton from '@/components/base/iconButton';

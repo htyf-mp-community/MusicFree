@@ -10,7 +10,7 @@ import {clearCache, getCacheSize, sizeFormatter} from '@/utils/fileUtils';
 import Toast from '@/utils/toast';
 import pathConst from '@/constants/pathConst';
 import {ROUTE_PATH, useNavigate} from '@/entry/router';
-import {readdir} from 'react-native-fs';
+import {readdir} from '@dr.pogodin/react-native-fs';
 import {qualityKeys, qualityText} from '@/utils/qualities';
 import {clearLog, getErrorLogContent} from '@/utils/log';
 import {ScrollView} from 'react-native-gesture-handler';

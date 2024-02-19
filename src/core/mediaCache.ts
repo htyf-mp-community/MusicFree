@@ -2,7 +2,7 @@ import {addFileScheme} from '@/utils/fileUtils';
 import getOrCreateMMKV from '@/utils/getOrCreateMMKV';
 import {getMediaKey} from '@/utils/mediaItem';
 import safeParse from '@/utils/safeParse';
-import {exists, unlink} from 'react-native-fs';
+import {exists, unlink} from '@dr.pogodin/react-native-fs';
 
 // Internal Method
 const mediaCacheStore = getOrCreateMMKV('cache.MediaCache', true);

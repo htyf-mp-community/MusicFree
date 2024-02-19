@@ -10,7 +10,7 @@ import {editingMusicListAtom, musicListChangedAtom} from '../store/atom';
 import Toast from '@/utils/toast';
 import Download from '@/core/download';
 
-import produce from 'immer';
+import {produce} from 'immer';
 import {useParams} from '@/entry/router';
 import {showPanel} from '@/components/panels/usePanel';
 import TrackPlayer from '@/core/trackPlayer';

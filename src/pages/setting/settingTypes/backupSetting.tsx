@@ -5,14 +5,14 @@ import DocumentPicker from 'react-native-document-picker';
 import ListItem, {ListItemHeader} from '@/components/base/listItem';
 import Toast from '@/utils/toast';
 import Backup from '@/core/backup';
-import {readFile, writeFile} from 'react-native-fs';
+import {readFile, writeFile} from '@dr.pogodin/react-native-fs';
 import {ROUTE_PATH, useNavigate} from '@/entry/router';
 
 import axios from 'axios';
 import {showDialog} from '@/components/dialogs/useDialog';
 import {showPanel} from '@/components/panels/usePanel';
 
-import {AuthType, createClient} from 'webdav';
+// import {AuthType, createClient} from 'webdav';
 import Config from '@/core/config';
 
 export default function BackupSetting() {
@@ -100,37 +100,37 @@ export default function BackupSetting() {
     }
 
     async function onResumeFromWebdav() {
-        const {username, password, url} = Config.get('setting.webdav') ?? {};
-        if (!(username && password && url)) {
-            Toast.warn('请先在「Webdav设置」中完成配置，再执行恢复');
-            return;
-        }
-        const client = createClient(url, {
-            authType: AuthType.Password,
-            username: username,
-            password: password,
-        });
+        // const {username, password, url} = Config.get('setting.webdav') ?? {};
+        // if (!(username && password && url)) {
+        //     Toast.warn('请先在「Webdav设置」中完成配置，再执行恢复');
+        //     return;
+        // }
+        // const client = createClient(url, {
+        //     authType: AuthType.Password,
+        //     username: username,
+        //     password: password,
+        // });
 
-        if (!(await client.exists('/MusicFree/MusicFreeBackup.json'))) {
-            Toast.warn('备份文件不存在');
-            return;
-        }
+        // if (!(await client.exists('/MusicFree/MusicFreeBackup.json'))) {
+        //     Toast.warn('备份文件不存在');
+        //     return;
+        // }
 
-        try {
-            const resumeData = await client.getFileContents(
-                '/MusicFree/MusicFreeBackup.json',
-                {
-                    format: 'text',
-                },
-            );
-            await Backup.resume(
-                resumeData,
-                Config.get('setting.backup.resumeMode') === 'overwrite',
-            );
-            Toast.success('恢复成功~');
-        } catch (e: any) {
-            Toast.warn(`恢复失败: ${e?.message ?? e}`);
-        }
+        // try {
+        //     const resumeData = await client.getFileContents(
+        //         '/MusicFree/MusicFreeBackup.json',
+        //         {
+        //             format: 'text',
+        //         },
+        //     );
+        //     await Backup.resume(
+        //         resumeData,
+        //         Config.get('setting.backup.resumeMode') === 'overwrite',
+        //     );
+        //     Toast.success('恢复成功~');
+        // } catch (e: any) {
+        //     Toast.warn(`恢复失败: ${e?.message ?? e}`);
+        // }
     }
 
     async function onBackupToWebdav() {
@@ -140,24 +140,24 @@ export default function BackupSetting() {
             return;
         }
         try {
-            const client = createClient(url, {
-                authType: AuthType.Password,
-                username: username,
-                password: password,
-            });
+            // const client = createClient(url, {
+            //     authType: AuthType.Password,
+            //     username: username,
+            //     password: password,
+            // });
 
-            const raw = Backup.backup();
-            if (!(await client.exists('/MusicFree'))) {
-                await client.createDirectory('/MusicFree');
-            }
+            // const raw = Backup.backup();
+            // if (!(await client.exists('/MusicFree'))) {
+            //     await client.createDirectory('/MusicFree');
+            // }
             // 临时文件
-            await client.putFileContents(
-                `/MusicFree/MusicFreeBackup.json`,
-                raw,
-                {
-                    overwrite: true,
-                },
-            );
+            // await client.putFileContents(
+            //     `/MusicFree/MusicFreeBackup.json`,
+            //     raw,
+            //     {
+            //         overwrite: true,
+            //     },
+            // );
             Toast.success('备份成功');
         } catch (e: any) {
             Toast.warn(`备份失败: ${e?.message ?? e}`);

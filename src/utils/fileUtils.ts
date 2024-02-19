@@ -9,7 +9,7 @@ import {
     readDir,
     unlink,
     writeFile,
-} from 'react-native-fs';
+} from '@dr.pogodin/react-native-fs';
 import {errorLog} from './log';
 import path from 'path-browserify';
 

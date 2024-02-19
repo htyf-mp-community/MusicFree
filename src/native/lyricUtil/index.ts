@@ -43,7 +43,7 @@ interface ILyricUtil extends NativeModule {
     requestSystemAlertPermission: () => Promise<boolean>;
 }
 
-const LyricUtil: ILyricUtil = NativeModules.LyricUtil;
+const LyricUtil: ILyricUtil = NativeModules.LyricUtil || {};
 
 const originalShowStatusBarLyric = LyricUtil.showStatusBarLyric;
 

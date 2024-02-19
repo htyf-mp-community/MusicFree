@@ -3,7 +3,7 @@
  */
 
 import {AppRegistry} from 'react-native';
-import Pages from './src/entry';
+import Pages from './src';
 import {name as appName} from './app.json';
 import TrackPlayer from 'react-native-track-player';
 

@@ -2,12 +2,12 @@
  * 歌单管理
  */
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import produce from 'immer';
+import {produce} from 'immer';
 import {useEffect, useState} from 'react';
 import {nanoid} from 'nanoid';
 import {getStorage, setStorage} from '@/utils/storage';
 import {isSameMediaItem} from '@/utils/mediaItem';
-import shuffle from 'lodash.shuffle';
+import {shuffle} from 'lodash';
 import {GlobalState} from '@/utils/stateMapper';
 
 const defaultSheet: IMusic.IMusicSheetItemBase = {

@@ -8,7 +8,7 @@ import {TouchableOpacity} from 'react-native';
 import {launchImageLibrary} from 'react-native-image-picker';
 import pathConst from '@/constants/pathConst';
 import Image from '@/components/base/image';
-import {copyFile, exists, unlink} from 'react-native-fs';
+import {copyFile, exists, unlink} from '@dr.pogodin/react-native-fs';
 import MusicSheet from '@/core/musicSheet';
 import {addFileScheme, addRandomHash} from '@/utils/fileUtils';
 import Toast from '@/utils/toast';

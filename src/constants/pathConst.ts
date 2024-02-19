@@ -1,5 +1,5 @@
 import {Platform} from 'react-native';
-import RNFS, {CachesDirectoryPath} from 'react-native-fs';
+import * as RNFS from '@dr.pogodin/react-native-fs';
 
 export const basePath =
     Platform.OS === 'android'
@@ -12,8 +12,8 @@ export default {
     logPath: `${basePath}/log/`,
     dataPath: `${basePath}/data/`,
     cachePath: `${basePath}/cache/`,
-    musicCachePath: CachesDirectoryPath + '/TrackPlayer',
-    imageCachePath: CachesDirectoryPath + '/image_manager_disk_cache',
+    musicCachePath: RNFS.CachesDirectoryPath + '/TrackPlayer',
+    imageCachePath: RNFS.CachesDirectoryPath + '/image_manager_disk_cache',
     lrcCachePath: `${basePath}/cache/lrc/`,
     downloadPath: `${basePath}/download/`,
     downloadMusicPath: `${basePath}/download/music/`,

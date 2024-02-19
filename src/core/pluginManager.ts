@@ -5,13 +5,13 @@ import {
     readFile,
     unlink,
     writeFile,
-} from 'react-native-fs';
+} from '@dr.pogodin/react-native-fs';
 import CryptoJs from 'crypto-js';
 import dayjs from 'dayjs';
 import axios from 'axios';
 import bigInt from 'big-integer';
 import qs from 'qs';
-import * as webdav from 'webdav';
+// import * as webdav from 'webdav';
 import {InteractionManager, ToastAndroid} from 'react-native';
 import pathConst from '@/constants/pathConst';
 import {compare, satisfies} from 'compare-versions';
@@ -47,7 +47,7 @@ import {addFileScheme, getFileName} from '@/utils/fileUtils';
 import {URL} from 'react-native-url-polyfill';
 import Base64 from '@/utils/base64';
 import MediaCache from './mediaCache';
-import produce from 'immer';
+import {produce} from 'immer';
 import MediaExtra from './mediaExtra';
 import objectPath from 'object-path';
 
@@ -71,7 +71,7 @@ const packages: Record<string, any> = {
     qs,
     he,
     '@react-native-cookies/cookies': CookieManager,
-    webdav,
+    // webdav,
 };
 
 const _require = (packageName: string) => {

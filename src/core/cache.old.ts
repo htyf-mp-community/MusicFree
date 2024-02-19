@@ -3,10 +3,10 @@ import {addFileScheme} from '@/utils/fileUtils';
 import {trace} from '@/utils/log';
 import {getMediaKey} from '@/utils/mediaItem';
 import {getStorage, setStorage} from '@/utils/storage';
-import produce from 'immer';
+import {produce} from 'immer';
 import LRUCache from 'lru-cache';
 import objectPath from 'object-path';
-import {exists, unlink} from 'react-native-fs';
+import {exists, unlink} from '@dr.pogodin/react-native-fs';
 import MediaMeta from './mediaMeta.old';
 import PluginManager from './pluginManager';
 

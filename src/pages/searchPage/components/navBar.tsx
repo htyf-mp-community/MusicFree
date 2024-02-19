@@ -106,8 +106,8 @@ const style = StyleSheet.create({
     },
     button: {
         paddingHorizontal: rpx(24),
-        height: '100%',
         justifyContent: 'center',
+        alignItems: 'center',
     },
     searchBarContainer: {
         flex: 1,

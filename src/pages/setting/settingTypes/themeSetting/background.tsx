@@ -5,7 +5,7 @@ import ThemeText from '@/components/base/themeText';
 // import pathConst from '@/constants/pathConst';
 import Config from '@/core/config';
 // import Color from 'color';
-// import {copyFile} from 'react-native-fs';
+// import {copyFile} from '@dr.pogodin/react-native-fs';
 // import ImageColors from 'react-native-image-colors';
 // import {launchImageLibrary} from 'react-native-image-picker';
 import ThemeCard from './themeCard';
