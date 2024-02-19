@@ -59,7 +59,9 @@ export default function PluginList() {
 
     async function onInstallFromLocalClick() {
         try {
-            const result = await DocumentPicker.pick();
+            const result = await DocumentPicker.pick({
+                allowMultiSelection: true,
+            });
             setLoading(true);
             // 初步过滤
             const validResult = result?.filter(
