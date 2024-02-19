@@ -75,7 +75,7 @@ function HomeDrawer(props: any) {
             <DrawerContentScrollView {...[props]} style={style.scrollWrapper}>
                 <View style={style.header}>
                     <ThemeText fontSize="appbar" fontWeight="bold">
-                        {DeviceInfo.getApplicationName()}
+                        MusicFree
                     </ThemeText>
                     {/* <IconButton icon={'qrcode-scan'} size={rpx(36)} /> */}
                 </View>
@@ -132,7 +132,7 @@ function HomeDrawer(props: any) {
                         </ListItem.ListItemText>
                     </ListItem>
 
-                    <ListItem
+                    {/* <ListItem
                         withHorizonalPadding
                         key={'update'}
                         onPress={() => {
@@ -148,7 +148,7 @@ function HomeDrawer(props: any) {
                             fontSize="subTitle">
                             {`当前版本: ${deviceInfoModule.getVersion()}`}
                         </ListItem.ListItemText>
-                    </ListItem>
+                    </ListItem> */}
                     <ListItem
                         withHorizonalPadding
                         key={'about'}
@@ -160,12 +160,12 @@ function HomeDrawer(props: any) {
                             width={rpx(48)}
                         />
                         <ListItem.Content
-                            title={`关于 ${deviceInfoModule.getApplicationName()}`}
+                            title={`关于 MusicFree`}
                         />
                     </ListItem>
                 </View>
 
-                <Divider />
+                {/* <Divider />
                 <ListItem
                     withHorizonalPadding
                     onPress={() => {
@@ -186,7 +186,7 @@ function HomeDrawer(props: any) {
                     }}>
                     <ListItem.ListItemIcon icon={'power'} width={rpx(48)} />
                     <ListItem.Content title={'退出应用'} />
-                </ListItem>
+                </ListItem> */}
             </DrawerContentScrollView>
         </>
     );

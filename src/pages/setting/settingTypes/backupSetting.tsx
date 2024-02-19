@@ -208,7 +208,7 @@ export default function BackupSetting() {
             <ListItem withHorizonalPadding onPress={onResumeFromUrl}>
                 <ListItem.Content title="从远程URL中恢复" />
             </ListItem>
-            <ListItemHeader>Webdav</ListItemHeader>
+            {/* <ListItemHeader>Webdav</ListItemHeader>
             <ListItem
                 withHorizonalPadding
                 onPress={() => {
@@ -247,7 +247,7 @@ export default function BackupSetting() {
             </ListItem>
             <ListItem withHorizonalPadding onPress={onResumeFromWebdav}>
                 <ListItem.Content title="从Webdav中恢复" />
-            </ListItem>
+            </ListItem> */}
         </View>
     );
 }

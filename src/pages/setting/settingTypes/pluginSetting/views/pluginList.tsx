@@ -59,7 +59,7 @@ export default function PluginList() {
 
     async function onInstallFromLocalClick() {
         try {
-            const result = await DocumentPicker.pickMultiple();
+            const result = await DocumentPicker.pick();
             setLoading(true);
             // 初步过滤
             const validResult = result?.filter(
