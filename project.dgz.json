@@ -3,6 +3,6 @@
   "name": "MusicFree",
   "projectname": "MusicFree",
   "appid": "MusicFree_996",
-  "appUrlConfig": "https://raw.gitmirror.com/htyf-mp-community/MusicFree/dgz/outputs/app.json",
-  "zipUrl": "https://raw.gitmirror.com/htyf-mp-community/MusicFree/dgz/outputs/dist.dgz"
+  "appUrlConfig": "https://raw.gitmirror.com/htyf-mp-community/MusicFree/master/dgz/build/outputs/app.json",
+  "zipUrl": "https://raw.gitmirror.com/htyf-mp-community/MusicFree/master/dgz/build/outputs/dist.dgz"
 }
