@@ -67,8 +67,8 @@ keystore.properties
 
 .vscode/
 tmp/
-scripts/
-
+scripts/*
+!scripts/index.js
 *.log
 
 # 只保留app.json/dist.dgz
