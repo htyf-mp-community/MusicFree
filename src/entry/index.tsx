@@ -25,7 +25,7 @@ const Stack = createNativeStackNavigator<any>();
 
 export default function Pages() {
     const theme = Theme.useTheme();
-
+    const background = Theme.useBackground();
     return (
         <>
             <BootstrapComp />
@@ -39,12 +39,16 @@ export default function Pages() {
                                 headerShown: false,
                                 animation: 'slide_from_right',
                                 animationDuration: 100,
+                                contentStyle: background?.url ? {} : {
+                                    backgroundColor: theme.colors.pageBackground
+                                },
                             }}>
                             {routes.map(route => (
                                 <Stack.Screen
                                     key={route.path}
                                     name={route.path}
                                     component={route.component}
+                                
                                 />
                             ))}
                         </Stack.Navigator>
