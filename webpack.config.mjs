@@ -123,7 +123,7 @@ export default (env) => {
         cheerio: path.join(dirname, './node_modules/cheerio/lib/slim.js'),
         realm$: path.join(dirname, './node_modules/realm/index.react-native.js'),
         nanoid$: path.join(dirname, './node_modules/nanoid/index.browser.cjs'),
-        webdav$: path.join(dirname, './node_modules/webdav/dist/web/index.js'),
+        webdav$: path.join(dirname, './node_modules/webdav/dist/web/source/index.ts'),
         // immer$: path.join(dirname, './node_modules/immer/dist/index.js'),
         // '@react-stately/combobox': path.join(dirname, './node_modules/@react-stately/combobox/src/index.ts'),
       },
@@ -182,6 +182,33 @@ export default (env) => {
         {
           test: /\.(js|jsx|ts|tsx|cjs)$/, 
           include: [
+            /node_modules(.*[/\\])+webdav/,
+          ],
+          use: (info) => {
+            console.log()
+            console.log('=============')
+            console.log()
+            console.log(info.resource)
+            console.log()
+            console.log('=============')
+            console.log()
+            return {
+              loader: 'babel-loader',
+              options: {
+                  presets: [
+                    'module:metro-react-native-babel-preset',
+                    ['@babel/preset-env', {
+                      modules: "cjs",
+                    }],
+                  ],
+                  plugins: []
+              },
+            }
+          }
+        },
+        {
+          test: /\.(js|jsx|ts|tsx|cjs)$/, 
+          include: [
             /node_modules(.*[/\\])+react/,
             /node_modules(.*[/\\])+@react-native/,
             /node_modules(.*[/\\])+@react-navigation/,
@@ -237,6 +264,7 @@ export default (env) => {
           ],
           use: 'babel-loader',
         },
+        
         {
           test: /\.(js|jsx|ts|tsx|cjs)$/, 
           include: [

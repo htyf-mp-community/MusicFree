@@ -1,6 +1,6 @@
 {
   "name": "MusicFree",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "license": "GPL",
   "private": true,
   "author": {
@@ -45,6 +45,7 @@
     "@hromovp/react-native-static-server": "0.5.5",
     "@miblanchard/react-native-slider": "2.3.1",
     "@native-base/icons": "0.0.11",
+    "@notifee/react-native": "7.8.2",
     "@pmmmwh/react-refresh-webpack-plugin": "0.5.11",
     "@ptomasroos/react-native-multi-slider": "2.2.2",
     "@react-native-async-storage/async-storage": "1.22.2",
@@ -71,6 +72,7 @@
     "@react-navigation/native": "6.1.12",
     "@react-navigation/native-stack": "6.9.20",
     "@react-navigation/stack": "6.3.23",
+    "@realm/fetch": "0.1.1",
     "@reduxjs/toolkit": "2.2.1",
     "@sayem314/react-native-keep-awake": "1.2.3",
     "@sentry/react-native": "5.19.1",
@@ -317,9 +319,7 @@
     "webpack": "5.90.3",
     "webpack-bundle-analyzer": "4.10.1",
     "webpack-sources": "3.2.3",
-    "zustand": "4.5.1",
-    "@notifee/react-native": "7.8.2",
-    "@realm/fetch": "0.1.1"
+    "zustand": "4.5.1"
   },
   "devDependencies": {
     "@babel/core": "7.12.9",
