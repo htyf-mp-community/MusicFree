@@ -123,7 +123,7 @@ export default (env) => {
         cheerio: path.join(dirname, './node_modules/cheerio/lib/slim.js'),
         realm$: path.join(dirname, './node_modules/realm/index.react-native.js'),
         nanoid$: path.join(dirname, './node_modules/nanoid/index.browser.cjs'),
-        webdav$: path.join(dirname, './node_modules/webdav/dist/web/source/index.ts'),
+        webdav$: path.join(dirname, './node_modules/webdav/dist/web/index.js'),
         // immer$: path.join(dirname, './node_modules/immer/dist/index.js'),
         // '@react-stately/combobox': path.join(dirname, './node_modules/@react-stately/combobox/src/index.ts'),
       },
@@ -186,20 +186,23 @@ export default (env) => {
           ],
           use: (info) => {
             console.log()
-            console.log('=============')
-            console.log()
+            console.log('====== 自定rules =======')
+            console.log('****')
             console.log(info.resource)
-            console.log()
-            console.log('=============')
+            console.log('****')
+            console.log('====== 自定rules =======')
             console.log()
             return {
               loader: 'babel-loader',
               options: {
                   presets: [
-                    'module:metro-react-native-babel-preset',
                     ['@babel/preset-env', {
-                      modules: "cjs",
+                      debug: true,
+                      modules: "amd",
                     }],
+                    ['module:metro-react-native-babel-preset', { 
+                      disableImportExportTransform: true 
+                    }]
                   ],
                   plugins: []
               },
@@ -259,8 +262,7 @@ export default (env) => {
             /node_modules(.*[/\\])+buffer/,
             /node_modules(.*[/\\])+@react-aria/,
             /node_modules(.*[/\\])+@react-stately/,
-            /node_modules(.*[/\\])+react-native-config/,
-            /node_modules(.*[/\\])+webdav/,
+            /node_modules(.*[/\\])+react-native-config/
           ],
           use: 'babel-loader',
         },
