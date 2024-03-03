@@ -195,16 +195,16 @@ export default (env) => {
             return {
               loader: 'babel-loader',
               options: {
-                  presets: [
-                    ['@babel/preset-env', {
-                      debug: true,
-                      modules: "amd",
-                    }],
-                    ['module:metro-react-native-babel-preset', { 
-                      disableImportExportTransform: true 
-                    }]
-                  ],
-                  plugins: []
+                  // presets: [
+                  //   ['@babel/preset-env', {
+                  //     debug: true,
+                  //     modules: "amd",
+                  //   }],
+                  //   ['module:metro-react-native-babel-preset', { 
+                  //     disableImportExportTransform: true 
+                  //   }]
+                  // ],
+                  // plugins: []
               },
             }
           }
