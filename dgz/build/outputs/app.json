@@ -2,7 +2,7 @@
   "type": "app",
   "name": "MusicFree",
   "appid": "MusicFree_996",
-  "version": "0.2.9",
+  "version": "0.2.10",
   "appUrlConfig": "https://raw.gitmirror.com/htyf-mp-community/MusicFree/master/dgz/build/outputs/app.json",
   "zipUrl": "https://raw.gitmirror.com/htyf-mp-community/MusicFree/master/dgz/build/outputs/dist.dgz"
 }
