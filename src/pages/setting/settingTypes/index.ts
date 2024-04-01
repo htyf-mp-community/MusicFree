@@ -31,7 +31,7 @@ const settingTypes: Record<
         component: BackupSetting,
     },
     about: {
-        title: `关于${deviceInfoModule.getApplicationName()}`,
+        title: `关于 MusicFree`,
         component: AboutSetting,
     },
 };
