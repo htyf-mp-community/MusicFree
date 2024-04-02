@@ -18,6 +18,7 @@ import {showPanel} from '@/components/panels/usePanel';
 import AppBar from '@/components/base/appBar';
 import Fab from '@/components/base/fab';
 import PluginItem from '../components/pluginItem';
+import jssdk from '@htyf-mp/js-sdk';
 
 export default function PluginList() {
     const plugins = PluginManager.useSortedPlugins();
@@ -105,6 +106,19 @@ export default function PluginList() {
                 setLoading(false);
             },
         });
+    }
+
+    async function onInstallFromQRClick(text: string) {
+        setLoading(true);
+        text = text || 'https://hongtangyun-1252095557.cos.ap-chengdu.myqcloud.com/assets/plugins.json'
+        const result = await installPluginFromUrl(text.trim());
+
+        if (result?.code === 'success') {
+            Toast.success('插件安装成功');
+        } else {
+            Toast.warn(`部分插件安装失败: ${result.message ?? ''}`);
+        }
+        setLoading(false);
     }
 
     async function onSubscribeClick() {
@@ -204,6 +218,9 @@ export default function PluginList() {
                                         value: '从网络安装插件',
                                     },
                                     {
+                                        value: '扫二维码安装插件',
+                                    },
+                                    {
                                         value: '更新全部插件',
                                     },
                                     {
@@ -211,7 +228,13 @@ export default function PluginList() {
                                     },
                                 ],
                                 onPress(item) {
-                                    if (item.value === '从本地安装插件') {
+                                    if (item.value === '') {
+                                        jssdk.openQR((text) => {
+                                            if (text) {
+                                                onInstallFromQRClick(text)
+                                            }
+                                        })
+                                    } else if (item.value === '从本地安装插件') {
                                         onInstallFromLocalClick();
                                     } else if (
                                         item.value === '从网络安装插件'
