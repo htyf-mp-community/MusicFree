@@ -1,6 +1,6 @@
 {
   "name": "MusicFree",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "license": "GPL",
   "private": true,
   "author": {
@@ -42,7 +42,7 @@
     "@gorhom/bottom-sheet": "4.6.1",
     "@hongtangyun/react-native-utils": "0.1.2",
     "@hromovp/react-native-static-server": "0.5.5",
-    "@htyf-mp/engines": "0.0.32",
+    "@htyf-mp/engines": "0.0.38",
     "@htyf-mp/js-sdk": "0.0.10",
     "@miblanchard/react-native-slider": "2.6.0",
     "@native-base/icons": "0.0.11",
