@@ -1,4 +1,3 @@
-import MusicSheet from '@/core/musicSheet';
 import {check, PERMISSIONS, request} from 'react-native-permissions';
 import RNTrackPlayer, {
     AppKilledPlaybackBehavior,
@@ -10,12 +9,11 @@ import pathConst from '@/constants/pathConst';
 import {checkAndCreateDir} from '@/utils/fileUtils';
 import {errorLog, trace} from '@/utils/log';
 import MediaMeta from '@/core/mediaMeta.old';
-import Cache from '@/core/cache.old';
 import PluginManager from '@/core/pluginManager';
 import Network from '@/core/network';
 import {ImgAsset} from '@/constants/assetsConst';
 import LocalMusicSheet from '@/core/localMusicSheet';
-import {Linking} from 'react-native';
+import {Linking, Platform} from 'react-native';
 import Theme from '@/core/theme';
 import LyricManager from '@/core/lyricManager';
 import Toast from '@/utils/toast';
@@ -24,6 +22,9 @@ import TrackPlayer from '@/core/trackPlayer';
 import musicHistory from '@/core/musicHistory';
 import PersistStatus from '@/core/persistStatus';
 import {perfLogger} from '@/utils/perfLogger';
+import MusicSheet from '@/core/musicSheet';
+import NativeUtils from '@/native/utils';
+import {showDialog} from '@/components/dialogs/useDialog.ts';
 
 /** app加载前执行
  * 1. 检查权限
@@ -34,18 +35,29 @@ import {perfLogger} from '@/utils/perfLogger';
 async function _bootstrap() {
     const logger = perfLogger();
     // 1. 检查权限
-    const [readStoragePermission, writeStoragePermission] = await Promise.all([
-        check(PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE),
-        check(PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE),
-    ]);
-    if (
-        !(
-            readStoragePermission === 'granted' &&
-            writeStoragePermission === 'granted'
-        )
-    ) {
-        await request(PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE);
-        await request(PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE);
+    if (Platform.OS === 'android' && Platform.Version >= 30) {
+        const hasPermission = await NativeUtils.checkStoragePermission();
+        if (
+            !hasPermission &&
+            !PersistStatus.get('app.skipBootstrapStorageDialog')
+        ) {
+            showDialog('CheckStorage');
+        }
+    } else {
+        const [readStoragePermission, writeStoragePermission] =
+            await Promise.all([
+                check(PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE),
+                check(PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE),
+            ]);
+        if (
+            !(
+                readStoragePermission === 'granted' &&
+                writeStoragePermission === 'granted'
+            )
+        ) {
+            await request(PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE);
+            await request(PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE);
+        }
     }
     logger.mark('权限检查完成');
 
@@ -117,10 +129,7 @@ async function _bootstrap() {
     });
     logger.mark('播放器初始化完成');
     trace('播放器初始化完成');
-    await Cache.setup();
-    logger.mark('缓存初始化完成');
 
-    trace('缓存初始化完成');
     await PluginManager.setup();
     logger.mark('插件初始化完成');
 
@@ -155,6 +164,7 @@ async function setupFolder() {
         checkAndCreateDir(pathConst.cachePath),
         checkAndCreateDir(pathConst.pluginPath),
         checkAndCreateDir(pathConst.lrcCachePath),
+        checkAndCreateDir(pathConst.localLrcPath),
         checkAndCreateDir(pathConst.downloadPath).then(() => {
             checkAndCreateDir(pathConst.downloadMusicPath);
         }),

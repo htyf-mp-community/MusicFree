@@ -1,6 +1,6 @@
 import deviceInfoModule from 'react-native-device-info';
 import AboutSetting from './aboutSetting';
-import BackupSetting from './backupSetting';
+// import BackupSetting from './backupSetting';
 import BasicSetting from './basicSetting';
 import PluginSetting from './pluginSetting';
 import ThemeSetting from './themeSetting';
@@ -26,10 +26,10 @@ const settingTypes: Record<
         title: '主题设置',
         component: ThemeSetting,
     },
-    backup: {
-        title: '备份与恢复',
-        component: BackupSetting,
-    },
+    // backup: {
+    //     title: '备份与恢复',
+    //     component: BackupSetting,
+    // },
     about: {
         title: `关于 MusicFree`,
         component: AboutSetting,

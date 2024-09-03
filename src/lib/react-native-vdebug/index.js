@@ -2,19 +2,19 @@
 import PropTypes from 'prop-types';
 import React, {PureComponent} from 'react';
 import {
-    ScrollView,
-    View,
-    Text,
-    TouchableOpacity,
-    PanResponder,
     Animated,
     Dimensions,
-    StyleSheet,
-    TextInput,
     Keyboard,
-    NativeModules,
-    Platform,
     KeyboardAvoidingView,
+    NativeModules,
+    PanResponder,
+    Platform,
+    ScrollView,
+    StyleSheet,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View,
 } from 'react-native';
 import event from './src/event';
 // import Network, { traceNetwork } from './src/network';
@@ -435,7 +435,7 @@ class VDebug extends PureComponent {
 
     render() {
         return (
-            <View pointerEvents="box-none" style={{flex: 1}}>
+            <View style={{flex: 1}}>
                 {this.renderPanel()}
                 {this.renderDebugBtn()}
             </View>

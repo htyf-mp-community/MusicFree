@@ -10,10 +10,7 @@ import Content from './components/content';
 import Lyric from './components/content/lyric';
 import NavBar from './components/navBar';
 import Config from '@/core/config';
-// import {
-//     activateKeepAwake,
-//     deactivateKeepAwake,
-// } from '@sayem314/react-native-keep-awake';
+import {activateKeepAwakeAsync, deactivateKeepAwake} from 'expo-keep-awake';
 
 export default function MusicDetail() {
     const orientation = useOrientation();
@@ -21,11 +18,11 @@ export default function MusicDetail() {
     useEffect(() => {
         const needAwake = Config.get('setting.basic.musicDetailAwake');
         if (needAwake) {
-            // activateKeepAwake();
+            activateKeepAwakeAsync();
         }
         return () => {
             if (needAwake) {
-                // deactivateKeepAwake();
+                deactivateKeepAwake();
             }
         };
     }, []);

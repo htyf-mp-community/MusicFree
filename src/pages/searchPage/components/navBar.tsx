@@ -3,22 +3,22 @@ import {StyleSheet, View} from 'react-native';
 import rpx from '@/utils/rpx';
 import {useAtom, useSetAtom} from 'jotai';
 import {
-    pageStatusAtom,
+    initSearchResults,
     PageStatus,
+    pageStatusAtom,
     queryAtom,
     searchResultsAtom,
-    initSearchResults,
 } from '../store/atoms';
 import useSearch from '../hooks/useSearch';
 import {addHistory} from '../common/historySearch';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import useColors from '@/hooks/useColors';
 import AppBar from '@/components/base/appBar';
 import Input from '@/components/base/input';
 import Color from 'color';
-import Button from '@/components/base/button';
+import Button from '@/components/base/textButton.tsx';
 import IconButton from '@/components/base/iconButton';
 import {iconSizeConst} from '@/constants/uiConst';
+import Icon from '@/components/base/icon.tsx';
 
 export default function NavBar() {
     const search = useSearch();
@@ -45,7 +45,7 @@ export default function NavBar() {
         <AppBar containerStyle={style.appbar} contentStyle={style.appbar}>
             <View style={style.searchBarContainer}>
                 <Icon
-                    name="magnify"
+                    name="magnifying-glass"
                     color={hintTextColor}
                     size={iconSizeConst.small}
                     style={style.magnify}
@@ -85,7 +85,7 @@ export default function NavBar() {
                             setPageStatus(PageStatus.EDITING);
                         }}
                         color={hintTextColor}
-                        name="close"
+                        name="x-mark"
                     />
                 ) : null}
             </View>
@@ -102,12 +102,12 @@ export default function NavBar() {
 
 const style = StyleSheet.create({
     appbar: {
-        paddingRight: 42,
+        paddingRight: 0,
     },
     button: {
         paddingHorizontal: rpx(24),
+        height: '100%',
         justifyContent: 'center',
-        alignItems: 'center',
     },
     searchBarContainer: {
         flex: 1,

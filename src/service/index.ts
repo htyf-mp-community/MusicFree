@@ -89,17 +89,24 @@ module.exports = async function () {
     });
 
     RNTrackPlayer.addEventListener(Event.PlaybackProgressUpdated, evt => {
-        try {
-            PersistStatus.set('music.progress', evt.position);
-            // 歌词逻辑
-            const parser = LyricManager.getLyricState().lyricParser;
-            if (parser) {
-                const prevLyricText = LyricManager.getCurrentLyric()?.lrc;
-                const currentLyricItem = parser.getPosition(evt.position).lrc;
-                if (prevLyricText !== currentLyricItem?.lrc) {
-                    LyricManager.setCurrentLyric(currentLyricItem ?? null);
-                    const showTranslation = PersistStatus.get(
-                        'lyric.showTranslation',
+        PersistStatus.set('music.progress', evt.position);
+
+        // 歌词逻辑
+        const parser = LyricManager.getLyricState().lyricParser;
+        if (parser) {
+            const prevLyricText = LyricManager.getCurrentLyric()?.lrc;
+            const currentLyricItem = parser.getPosition(evt.position);
+            if (prevLyricText !== currentLyricItem?.lrc) {
+                LyricManager.setCurrentLyric(currentLyricItem ?? null);
+                const showTranslation = PersistStatus.get(
+                    'lyric.showTranslation',
+                );
+                if (Config.get('setting.lyric.showStatusBarLyric')) {
+                    LyricUtil.setStatusBarLyricText(
+                        (currentLyricItem?.lrc ?? '') +
+                            (showTranslation
+                                ? `\n${currentLyricItem?.translation ?? ''}`
+                                : ''),
                     );
                     if (Config.get('setting.lyric.showStatusBarLyric')) {
                         LyricUtil.setStatusBarLyricText(
@@ -115,8 +122,6 @@ module.exports = async function () {
                     }
                 }
             }
-        } catch (error) {
-            console.error(error);
         }
     });
 
