@@ -1,1 +1,8 @@
-{"type":"app","name":"MusicFree","appid":"MusicFree_996__dev__","version":"0.4.0.1725208360367","appUrlConfig":"http://192.168.199.150:8000/app.json","zipUrl":"http://192.168.199.150:8000/dist.dgz"}
+{
+  "type": "app",
+  "name": "MusicFree",
+  "appid": "MusicFree_996",
+  "version": "0.4.0",
+  "appUrlConfig": "https://raw.githubusercontent.com/htyf-mp-community/MusicFree/master/dgz/build/outputs/app.json",
+  "zipUrl": "https://raw.githubusercontent.com/htyf-mp-community/MusicFree/master/dgz/build/outputs/dist.dgz"
+}
