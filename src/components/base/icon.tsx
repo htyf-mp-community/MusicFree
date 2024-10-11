@@ -150,6 +150,8 @@ interface IProps extends SvgProps {
     size?: number;
 }
 
+console.error(11111, 222, AlarmOutlineIcon)
+
 const iconMap = {
     'alarm-outline': AlarmOutlineIcon,
     'album-outline': AlbumOutlineIcon,
@@ -232,6 +234,5 @@ export default function Icon(props: IProps) {
     } as SvgProps;
 
     const Component = iconMap[name];
-    return <View  {...newProps} />
     return <Component {...newProps} />;
 }

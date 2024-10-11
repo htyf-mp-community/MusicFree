@@ -1,6 +1,7 @@
 import pathConst from '@/constants/pathConst';
 import FastImage from 'react-native-fast-image';
-import RNFS, {
+import * as RNFS from '@dr.pogodin/react-native-fs';
+import {
     copyFile,
     downloadFile,
     exists,
@@ -149,11 +150,15 @@ export function getFileName(filePath: string, withoutExt?: boolean) {
     if (lastSlash === -1) {
         return filePath;
     }
-    const fileName = filePath.slice(lastSlash + 1);
+    let fileName = filePath.slice(lastSlash + 1);
     if (withoutExt) {
         const lastDot = fileName.lastIndexOf('.');
-        return lastDot === -1 ? fileName : fileName.slice(0, lastDot);
-    } else {
+        fileName = lastDot === -1 ? fileName : fileName.slice(0, lastDot);
+    }
+
+    try {
+        return decodeURIComponent(fileName);
+    } catch {
         return fileName;
     }
 }

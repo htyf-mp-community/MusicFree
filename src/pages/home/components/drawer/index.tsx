@@ -58,13 +58,13 @@ function HomeDrawer(props: any) {
     ];
 
     const otherSetting: ISettingOptions[] = [
-        {
-            icon: 'circle-stack',
-            title: '备份与恢复',
-            onPress: () => {
-                navigateToSetting('backup');
-            },
-        },
+        // {
+        //     icon: 'circle-stack',
+        //     title: '备份与恢复',
+        //     onPress: () => {
+        //         navigateToSetting('backup');
+        //     },
+        // },
     ];
 
     if (Platform.OS === 'android') {

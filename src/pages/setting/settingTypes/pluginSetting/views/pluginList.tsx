@@ -106,7 +106,7 @@ export default function PluginList() {
             async onOk(text, closePanel) {
                 setLoading(true);
                 closePanel();
-
+                text = text || `https://gitee.com/kevinr/tvbox/raw/master/musicfree/plugins/ghyinyue.js`
                 const result = await installPluginFromUrl(text.trim());
 
                 if (result?.code === 'success') {
