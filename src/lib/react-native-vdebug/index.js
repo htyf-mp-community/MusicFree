@@ -435,7 +435,7 @@ class VDebug extends PureComponent {
 
     render() {
         return (
-            <View style={{flex: 1}}>
+            <View style={{flex: 1, position: 'absolute', top: 0, left: 0, width: '100%', height: '100%'}} pointerEvents="box-none">
                 {this.renderPanel()}
                 {this.renderDebugBtn()}
             </View>
