@@ -682,6 +682,12 @@ const play = async (
                     title: '流量提醒',
                     content:
                         '当前非WIFI环境，侧边栏设置中打开【使用移动网络播放】功能后可继续播放',
+                    cancelText: '知道了',
+                    okText: '立即播放',
+                    onOk: () => {
+                        Config.set('setting.basic.useCelluarNetworkPlay', true);
+                        play(musicItem, forcePlay);
+                    }
                 });
             }
         } else if (message === PlayFailReason.INVALID_SOURCE) {
