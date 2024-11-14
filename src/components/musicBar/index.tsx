@@ -11,6 +11,7 @@ import TrackPlayer from '@/core/trackPlayer';
 import {musicIsPaused} from '@/utils/trackUtils';
 import MusicInfo from './musicInfo';
 import Icon from '@/components/base/icon.tsx';
+import jssdk from '@htyf-mp/js-sdk';
 
 function CircularPlayBtn() {
     const progress = TrackPlayer.useProgress();
@@ -79,6 +80,7 @@ function MusicBar() {
 
     return (
         <>
+            {jssdk.AdBanner && <jssdk.AdBanner />}
             {musicItem && !showKeyboard && (
                 <View
                     style={[
