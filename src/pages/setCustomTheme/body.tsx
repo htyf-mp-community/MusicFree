@@ -1,5 +1,6 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {Alert, Platform, StyleSheet, View} from 'react-native';
+import { check, request, PERMISSIONS, RESULTS, openSettings } from 'react-native-permissions';
 import rpx from '@/utils/rpx';
 import globalStyle from '@/constants/globalStyle';
 import Image from '@/components/base/image';
@@ -17,12 +18,68 @@ import {showPanel} from '@/components/panels/usePanel';
 import {grayRate} from '@/utils/colorUtil';
 import {CustomizedColors} from '@/hooks/useColors';
 
+const checkPhotoPermission = async () => {
+    return new Promise(async (resolve) => {
+        const permission =
+      Platform.OS === 'ios' ? PERMISSIONS.IOS.PHOTO_LIBRARY : PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE;
+
+    // 检查权限状态
+    const result = await check(permission);
+
+    switch (result) {
+      case RESULTS.GRANTED:
+        resolve(true);
+        // Alert.alert('权限已授予', '您已经拥有访问相册的权限。');
+        break;
+      case RESULTS.DENIED:
+        // 请求权限
+        const requestResult = await request(permission);
+        if (requestResult === RESULTS.GRANTED) {
+            resolve(true);
+        //   Alert.alert('权限已授予', '您已成功获取访问相册的权限。');
+        } else {
+            resolve(false);
+            // Alert.alert('权限未授予', '您需要前往设置页面手动授予权限。');
+        }
+        break;
+      case RESULTS.BLOCKED:
+      case RESULTS.UNAVAILABLE:
+        resolve(false);
+        break;
+      default:
+        resolve(false);
+        // Alert.alert('未知状态', '请检查权限配置是否正确。');
+        break;
+    }
+    })
+  };
+
 export default function Body() {
     const theme = Theme.useTheme();
     const backgroundInfo = Theme.useBackground();
 
     async function onImageClick() {
         try {
+            const isOk = await checkPhotoPermission()
+            if (!isOk) {
+                Alert.alert(
+                    '权限被拒绝',
+                    '相册权限被拒绝，请前往设置页面启用权限。',
+                    [
+                      { text: '取消', style: 'cancel' },
+                      {
+                        text: '去设置',
+                        onPress: () => {
+                          openSettings().catch(() => {
+                            Alert.alert('无法打开设置', '请手动打开设置页面。');
+                          });
+                        },
+                      },
+                    ],
+                );
+                return;
+            }
+            
             const result = await launchImageLibrary({
                 mediaType: 'photo',
             });
@@ -117,6 +174,17 @@ export default function Body() {
             //     accent: textHighlight,
             // });
         } catch (e) {
+            Alert.alert(`打开相册失败`, '', [
+                {
+                    text: '关闭',
+                },
+                {
+                    text: '前往设置',
+                    onPress: () => {
+                        
+                    }
+                },
+            ])
             console.log(e);
         }
     }
