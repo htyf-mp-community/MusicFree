@@ -8,7 +8,7 @@ import {ImgAsset} from '@/constants/assetsConst';
 import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 import {launchImageLibrary} from 'react-native-image-picker';
 import pathConst from '@/constants/pathConst';
-import {copyFile} from '@dr.pogodin/react-native-fs';
+import {copyFile, unlink} from '@dr.pogodin/react-native-fs';
 import ImageColors from 'react-native-image-colors';
 import ThemeText from '@/components/base/themeText';
 import Slider from '@react-native-community/slider';
@@ -91,7 +91,17 @@ export default function Body() {
             const bgPath = `${pathConst.dataPath}background${uri.substring(
                 uri.lastIndexOf('.'),
             )}`;
-            await copyFile(uri, bgPath);
+            try {
+                await unlink(bgPath);  
+            } catch (error) {
+                console.error(error)
+            }
+            try {
+                await copyFile(uri, bgPath);
+            } catch (error) {
+                console.error(error)
+            }
+            
 
             const colorsResult = await ImageColors.getColors(uri, {
                 fallback: '#ffffff',
@@ -174,7 +184,7 @@ export default function Body() {
             //     accent: textHighlight,
             // });
         } catch (e) {
-            console.log(e);
+            console.error(e);
         }
     }
 
