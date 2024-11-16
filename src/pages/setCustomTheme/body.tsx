@@ -174,17 +174,6 @@ export default function Body() {
             //     accent: textHighlight,
             // });
         } catch (e) {
-            Alert.alert(`打开相册失败`, '', [
-                {
-                    text: '关闭',
-                },
-                {
-                    text: '前往设置',
-                    onPress: () => {
-                        
-                    }
-                },
-            ])
             console.log(e);
         }
     }
