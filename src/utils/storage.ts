@@ -1,9 +1,12 @@
 import {errorLog} from '@/utils/log';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import { MultiGetCallback } from '@react-native-async-storage/async-storage/lib/typescript/types';
+import { MMKV } from 'react-native-mmkv';
+const AsyncStorage = new MMKV({
+    id: 'musicfree',
+});
 export async function setStorage(key: string, value: any) {
     try {
-        await AsyncStorage.setItem(key, JSON.stringify(value, null, ''));
+        await AsyncStorage.set(key, JSON.stringify(value, null, ''));
     } catch (e: any) {
         errorLog(`存储失败${key}`, e?.message);
     }
@@ -11,7 +14,7 @@ export async function setStorage(key: string, value: any) {
 
 export async function getStorage(key: string) {
     try {
-        const result = await AsyncStorage.getItem(key);
+        const result = await AsyncStorage.getString(key);
         if (result) {
             return JSON.parse(result);
         }
@@ -23,7 +26,14 @@ export async function getMultiStorage(keys: string[]) {
     if (keys.length === 0) {
         return [];
     }
-    const result = await AsyncStorage.multiGet(keys);
+    const multiGet = (keys: readonly string[], callback?: MultiGetCallback) => {
+    const values = keys.map((key) => AsyncStorage.getString(key))
+    if (callback && typeof callback === 'function') {
+        callback(undefined, values as any);
+    }
+    return values;
+    }
+    const result = await multiGet(keys);
 
     return result.map(_ => {
         try {
@@ -38,5 +48,5 @@ export async function getMultiStorage(keys: string[]) {
 }
 
 export async function removeStorage(key: string) {
-    return AsyncStorage.removeItem(key);
+    return AsyncStorage.delete(key);
 }
