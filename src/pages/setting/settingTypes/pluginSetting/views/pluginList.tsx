@@ -20,6 +20,7 @@ import Fab from '@/components/base/fab';
 import PluginItem from '../components/pluginItem';
 import {IIconName} from '@/components/base/icon.tsx';
 import {readAsStringAsync} from 'expo-file-system';
+import jssdk from '@htyf-mp/js-sdk';
 
 interface IOption {
     icon: IIconName;
@@ -119,6 +120,19 @@ export default function PluginList() {
         });
     }
 
+    async function onInstallFromQRClick(qr?: boolean) {
+        setLoading(true);
+        const text = await jssdk.openQR();
+        const result = await installPluginFromUrl(text?.trim());
+
+        if (result?.code === 'success') {
+            Toast.success('插件安装成功');
+        } else {
+            Toast.warn(`部分插件安装失败: ${result.message ?? ''}`);
+        }
+        setLoading(false);
+    }
+
     async function onSubscribeClick() {
         const urls = Config.get('setting.plugin.subscribeUrl');
         if (!urls) {
@@ -216,6 +230,9 @@ export default function PluginList() {
                                         value: '从网络安装插件',
                                     },
                                     {
+                                        value: '从二维码安装插件',
+                                    },
+                                    {
                                         value: '更新全部插件',
                                     },
                                     {
@@ -229,6 +246,10 @@ export default function PluginList() {
                                         item.value === '从网络安装插件'
                                     ) {
                                         onInstallFromNetworkClick();
+                                    } else if (
+                                        item.value === '从二维码安装插件'
+                                    ) {
+                                        onInstallFromQRClick();
                                     } else if (item.value === '更新订阅') {
                                         onSubscribeClick();
                                     } else if (item.value === '更新全部插件') {
