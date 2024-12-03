@@ -1,6 +1,5 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import bootstrap from './bootstrap';
 import {navigationRef, routes} from './router';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
@@ -16,6 +15,7 @@ import {BootstrapComp} from './useBootstrap';
 import {ToastBaseComponent} from '@/components/base/toast';
 import {Animated, Platform, StatusBar} from 'react-native';
 import { createStackNavigator, StackCardInterpolatedStyle, StackCardInterpolationProps } from '@react-navigation/stack';
+import {ReducedMotionConfig, ReduceMotion} from 'react-native-reanimated';
 
 /**
  * 字体颜色
@@ -88,6 +88,7 @@ export default function Pages() {
     return (
         <>
             <BootstrapComp />
+            <ReducedMotionConfig mode={ReduceMotion.Never} />
             <GestureHandlerRootView style={globalStyle.flex1}>
                 <SafeAreaProvider>
                     <NavigationContainer theme={theme} independent ref={navigationRef}>

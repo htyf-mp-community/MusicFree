@@ -2677,7 +2677,7 @@
   dependencies:
     "@hapi/hoek" "^9.0.0"
 
-"@htyf-mp/engines@^0.5.18":
+"@htyf-mp/engines@0.5.18":
   version "0.5.18"
   resolved "https://registry.yarnpkg.com/@htyf-mp/engines/-/engines-0.5.18.tgz#80168dbf37336a3fdc49cf4e1ed76acd3b679de6"
   integrity sha512-R1UXYne3FzS5fu2wRQUqqxUD2Gcl3CrYmtW+jTsvsminkj1WdxQWPMI+OXgwwmH0Oq3unuZrm+YsEbAu0/KnoA==
@@ -2716,7 +2716,7 @@
     webpack-merge "5.10.0"
     yarn-add-no-save "1.0.3"
 
-"@htyf-mp/js-sdk@^0.0.27":
+"@htyf-mp/js-sdk@0.0.27":
   version "0.0.27"
   resolved "https://registry.yarnpkg.com/@htyf-mp/js-sdk/-/js-sdk-0.0.27.tgz#6137a4f3373081301aad0db36cdc2639979e50ce"
   integrity sha512-AZAoenrBtolQYUWmAywQwmOIvxsNZdYdwdXBT/Uq57sBbyTNF/4RY+RPO/6lvjrmkgmLXCoC2ShKYdP00yJO9w==
