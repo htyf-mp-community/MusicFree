@@ -107,7 +107,7 @@ export default function PluginList() {
             async onOk(text, closePanel) {
                 setLoading(true);
                 closePanel();
-                text = text || `https://gitee.com/kevinr/tvbox/raw/master/musicfree/plugins/ghyinyue.js`
+                text = text || `https://musicfreepluginshub.2020818.xyz/plugins.json`
                 const result = await installPluginFromUrl(text.trim());
 
                 if (result?.code === 'success') {
@@ -286,7 +286,7 @@ const reqHeaders = {
     Expires: '0',
 };
 
-async function installPluginFromUrl(text: string): Promise<IInstallResult> {
+export async function installPluginFromUrl(text: string): Promise<IInstallResult> {
     try {
         let urls: string[] = [];
         const iptUrl = text.trim();
