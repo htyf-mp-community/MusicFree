@@ -15,9 +15,10 @@ import HomeBodyHorizontal from './components/homeBodyHorizontal';
 import useOrientation from '@/hooks/useOrientation';
 import { installPluginFromUrl } from '../setting/settingTypes/pluginSetting/views/pluginList';
 import Toast from '@/utils/toast';
-import PluginManager from '@/core/pluginManager';
+import PluginManager, { IInstallPluginResult } from '@/core/pluginManager';
 import { useDebounceEffect } from 'ahooks'
 import jssdk from '@htyf-mp/js-sdk'
+import { showDialog } from '@/components/dialogs/useDialog';
 
 function Home() {
     const plugins = PluginManager.useSortedPlugins();
@@ -27,14 +28,29 @@ function Home() {
             try {
                 const text = `https://musicfreepluginshub.2020818.xyz/plugins.json`
                 const result = await installPluginFromUrl(text.trim());
+                // 检查是否全部安装成功
+                const successResults: IInstallPluginResult[] = [];
+                const failResults: IInstallPluginResult[] = [];
+                for (let i = 0; i < result.length; ++i) {
+                    if (result[i].success) {
+                        successResults.push(result[i]);
+                    } else {
+                        failResults.push(result[i]);
+                    }
+                }
 
-                if (result?.code === 'success') {
+                if (!failResults.length) {
                     Toast.success('插件安装成功');
                 } else {
-                    Toast.warn(`部分插件安装失败: ${result.message ?? ''}`);
-                    jssdk.showToast({
-                        type: 'error',
-                        title: `安装失败: ${result.message ?? ''}`,
+                    Toast.warn((successResults.length ? "部分" : "全部") + "插件安装失败", {
+                        'type': 'warn',
+                        'actionText': "查看",
+                        'onActionClick': () => {
+                            showDialog('SimpleDialog', {
+                                title: "插件安装失败",
+                                content: "以下插件安装失败: \n" + failResults.map(it => (it.pluginUrl ?? "") + "\n失败原因：" + it.message).join('\n-----\n'),
+                            })
+                        }
                     });
                 }
             } catch (error) {

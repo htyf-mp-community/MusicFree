@@ -1,8 +1,0 @@
-{
-  "type": "app",
-  "name": "MusicFree",
-  "appid": "MusicFree_996",
-  "version": "0.4.15",
-  "appUrlConfig": "https://raw.githubusercontent.com/htyf-mp-community/MusicFree/master/dgz/build/outputs/app.json",
-  "zipUrl": "https://raw.githubusercontent.com/htyf-mp-community/MusicFree/master/dgz/build/outputs/dist.dgz"
-}

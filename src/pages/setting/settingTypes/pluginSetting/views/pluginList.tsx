@@ -314,7 +314,7 @@ const style = StyleSheet.create({
 
 
 
-async function installPluginFromUrl(text: string): Promise<IInstallPluginResult[]> {
+export async function installPluginFromUrl(text: string): Promise<IInstallPluginResult[]> {
     try {
         let urls: string[] = [];
         const inputUrl = text.trim();
