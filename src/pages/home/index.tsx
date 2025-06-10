@@ -65,7 +65,7 @@ function Home() {
             jssdk.showModal({
                 title: '是否添加插件',
                 description: '尝试添加默认插件',
-                success: () => {
+                onConfirm: () => {
                     init();
                 },
             });
