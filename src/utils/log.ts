@@ -1,8 +1,8 @@
-import {fileAsyncTransport, logger} from 'react-native-logs';
+import { fileAsyncTransport, logger } from "react-native-logs";
 import * as RNFS from '@dr.pogodin/react-native-fs';
-import pathConst from '@/constants/pathConst';
-import Config from '../core/config';
-import {addLog} from '@/lib/react-native-vdebug/src/log';
+import pathConst from "@/constants/pathConst";
+import Config from "../core/config.ts";
+import { addLog } from "@/lib/react-native-vdebug/src/log";
 
 const config = {
     transport: fileAsyncTransport,
@@ -36,7 +36,7 @@ export function trace(
         console.log(desc, message);
     }
     // 特殊情况记录操作路径
-    if (Config.get('setting.basic.debug.traceLog')) {
+    if (Config.getConfig('debug.traceLog')) {
         traceLogger[level]({
             desc,
             message,
@@ -97,7 +97,7 @@ export async function getErrorLogContent() {
 }
 
 export function errorLog(desc: string, message: any) {
-    if (Config.get('setting.basic.debug.errorLog')) {
+    if (Config.getConfig('debug.errorLog')) {
         log.error({
             desc,
             message,
@@ -110,7 +110,7 @@ export function devLog(
     method: 'log' | 'error' | 'warn' | 'info',
     ...args: any[]
 ) {
-    if (Config.get('setting.basic.debug.devLog')) {
+    if (Config.getConfig('debug.devLog')) {
         addLog(method, args);
     }
 }

@@ -1,25 +1,16 @@
-const {getDefaultConfig} = require('expo/metro-config');
-const {mergeConfig} = require('@react-native/metro-config');
+const isExpo = !!process.env.EXPO_DEV_SERVER_ORIGIN;
 
-/**
- * Reference: https://github.com/software-mansion/react-native-svg/blob/main/USAGE.md
- */
-const defaultConfig = getDefaultConfig(__dirname);
-const {assetExts, sourceExts} = defaultConfig.resolver;
-/**
- * Metro configuration
- * https://reactnative.dev/docs/metro
- *
- * @type {import('metro-config').MetroConfig}
- */
-const config = {
-    transformer: {
-        babelTransformerPath: require.resolve('react-native-svg-transformer'),
-    },
-    resolver: {
-        assetExts: assetExts.filter(ext => ext !== 'svg'),
-        sourceExts: [...sourceExts, 'svg'],
-    },
-};
-
-module.exports = mergeConfig(getDefaultConfig(__dirname), config);
+if (isExpo) {
+  const {getDefaultConfig} = require('expo/metro-config');
+  module.exports = getDefaultConfig(__dirname);
+} else {
+  const { mergeConfig } = require('metro-config')
+  const { getMetroConfig } = require('@tarojs/rn-supporter')
+  module.exports = (async function (){
+    return mergeConfig({
+    // custom your metro config here
+    // https://facebook.github.io/metro/docs/configuration
+      resolver: {}
+    }, await getMetroConfig())
+  })()
+}

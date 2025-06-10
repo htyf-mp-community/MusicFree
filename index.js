@@ -1,20 +1,19 @@
-/**
- * @format
- */
-
-import {AppRegistry} from 'react-native';
-import Pages from './src';
-import {name as appName} from './app.json';
-import TrackPlayer from 'react-native-track-player';
-import SplashScreen from 'react-native-splash-screen';
+/** 禁止修改此块代码 */
+import * as SplashScreen from 'expo-splash-screen';
+import App from './src'
 import { useEffect } from 'react';
 
-const Root = () => {
-  useEffect(() => {
-    SplashScreen.hide();
-  }, [])
-  return <Pages />
-}
-TrackPlayer.registerPlaybackService(() => require('./src/service/index'));
-AppRegistry.registerComponent(appName, () => Root)
 
+// keep the splash screen visible while complete fetching resources
+SplashScreen.preventAutoHideAsync();
+
+export default function Root() {
+  useEffect(() => {
+    SplashScreen.hideAsync();
+    return () => {
+
+    }
+  }, [])
+  return <App />;
+}
+/** 禁止修改此块代码 */

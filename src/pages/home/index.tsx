@@ -1,11 +1,11 @@
-import React, {useEffect} from 'react';
-import {Alert, StyleSheet} from 'react-native';
+import React, { useEffect } from 'react';
+import { Alert, StyleSheet } from 'react-native';
 
 import NavBar from './components/navBar';
 import MusicBar from '@/components/musicBar';
-import {createDrawerNavigator} from '@react-navigation/drawer';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import HomeDrawer from './components/drawer';
-import {SafeAreaView} from 'react-native-safe-area-context';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import StatusBar from '@/components/base/statusBar';
 import HorizontalSafeAreaView from '@/components/base/horizontalSafeAreaView.tsx';
 import globalStyle from '@/constants/globalStyle';
@@ -16,41 +16,57 @@ import useOrientation from '@/hooks/useOrientation';
 import { installPluginFromUrl } from '../setting/settingTypes/pluginSetting/views/pluginList';
 import Toast from '@/utils/toast';
 import PluginManager from '@/core/pluginManager';
-import { useDebounceEffect} from 'ahooks'
+import { useDebounceEffect } from 'ahooks'
+import jssdk from '@htyf-mp/js-sdk'
 
 function Home() {
     const plugins = PluginManager.useSortedPlugins();
     const orientation = useOrientation();
     useDebounceEffect(() => {
-      const init = async () => {
-        try {
-            const text = `https://musicfreepluginshub.2020818.xyz/plugins.json`
-            const result = await installPluginFromUrl(text.trim());
-    
-            if (result?.code === 'success') {
-                Toast.success('插件安装成功');
-            } else {
-                Toast.warn(`部分插件安装失败: ${result.message ?? ''}`);
+        const init = async () => {
+            try {
+                const text = `https://musicfreepluginshub.2020818.xyz/plugins.json`
+                const result = await installPluginFromUrl(text.trim());
+
+                if (result?.code === 'success') {
+                    Toast.success('插件安装成功');
+                } else {
+                    Toast.warn(`部分插件安装失败: ${result.message ?? ''}`);
+                    jssdk.showToast({
+                        type: 'error',
+                        title: `安装失败: ${result.message ?? ''}`,
+                    });
+                }
+            } catch (error) {
+                jssdk.showToast({
+                    type: 'error',
+                    title: '插件安装失败',
+                });
+                console.error(error);
             }
-        } catch (error) {
-            console.error(error);
         }
-      }
-      if (plugins.length <= 0) {
-        // 是否添加插件
-        Alert.alert('是否添加插件', '尝试添加默认插件', [
-            {
-                text: '取消',
-                onPress: () => {},
-            },
-            {
-                text: '添加',
-                onPress: () => {
+        if (plugins.length <= 0) {
+            jssdk.showModal({
+                title: '是否添加插件',
+                description: '尝试添加默认插件',
+                success: () => {
                     init();
                 },
-            },
-        ]);
-      }
+            });
+            // 是否添加插件
+            // Alert.alert('是否添加插件', '尝试添加默认插件', [
+            //     {
+            //         text: '取消',
+            //         onPress: () => { },
+            //     },
+            //     {
+            //         text: '添加',
+            //         onPress: () => {
+            //             init();
+            //         },
+            //     },
+            // ]);
+        }
     }, [plugins], {
         wait: 1000,
     });

@@ -1,10 +1,7 @@
 import {getAppMeta, setAppMeta} from '@/core/appMeta.ts';
 import {getStorage as oldGetStorage} from '@/utils/storage';
 import storage from '@/core/musicSheet/storage.ts';
-import { MMKV } from 'react-native-mmkv';
-const AsyncStorage = new MMKV({
-    id: 'musicfree',
-});
+import { removeStorage } from '@/utils/storage.ts';
 
 export default async function migrate() {
     const dbUpdated = +(getAppMeta('MusicSheetVersion') || '0') > 1;
@@ -22,11 +19,11 @@ export default async function migrate() {
         }
 
         await storage.setSheets(musicSheets);
-        await AsyncStorage.delete('music-sheets');
+        await removeStorage('music-sheets');
         for (let sheet of musicSheets) {
             const musicList = await oldGetStorage(sheet.id);
             await storage.setMusicList(sheet.id, musicList);
-            await AsyncStorage.delete(sheet.id);
+            await removeStorage(sheet.id);
         }
         setAppMeta('MusicSheetVersion', '1');
     } catch (e) {
