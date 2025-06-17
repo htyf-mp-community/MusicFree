@@ -59,7 +59,7 @@ export async function clearLog() {
 
 export async function getErrorLogContent() {
     try {
-        const files = await RNFS.readDir(pathConst.logPath);
+        const files = await readDir(pathConst.logPath);
         console.log(files);
         const today = new Date();
         // 两天的错误日志
@@ -85,10 +85,10 @@ export async function getErrorLogContent() {
         );
         let logContent = '';
         if (todayLog) {
-            logContent += await RNFS.readFile(todayLog.path, 'utf8');
+            logContent += await readFile(todayLog.path, 'utf8');
         }
         if (yesterdayLog) {
-            logContent += await RNFS.readFile(yesterdayLog.path, 'utf8');
+            logContent += await readFile(yesterdayLog.path, 'utf8');
         }
         return logContent;
     } catch {

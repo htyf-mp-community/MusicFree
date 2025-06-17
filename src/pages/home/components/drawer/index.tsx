@@ -1,21 +1,21 @@
-import React, {memo} from 'react';
-import {BackHandler, Platform, StyleSheet, View} from 'react-native';
+import React, { memo } from 'react';
+import { BackHandler, Platform, StyleSheet, View } from 'react-native';
 import rpx from '@/utils/rpx';
-import {DrawerContentScrollView} from '@react-navigation/drawer';
+import { DrawerContentScrollView } from '@react-navigation/drawer';
 import ListItem from '@/components/base/listItem';
-import {ROUTE_PATH, useNavigate} from '@/core/router';
+import { ROUTE_PATH, useNavigate } from '@/core/router';
 import ThemeText from '@/components/base/themeText';
 import PageBackground from '@/components/base/pageBackground';
 import DeviceInfo from 'react-native-device-info';
 import deviceInfoModule from 'react-native-device-info';
 import NativeUtils from '@/native/utils';
-import {useTimingClose} from '@/utils/timingClose';
+import { useTimingClose } from '@/utils/timingClose';
 import timeformat from '@/utils/timeformat';
-import {showPanel} from '@/components/panels/usePanel';
+import { showPanel } from '@/components/panels/usePanel';
 import Divider from '@/components/base/divider';
 import TrackPlayer from '@/core/trackPlayer';
-import {checkUpdateAndShowResult} from '@/hooks/useCheckUpdate.ts';
-import {IIconName} from '@/components/base/icon.tsx';
+import { checkUpdateAndShowResult } from '@/hooks/useCheckUpdate.ts';
+import { IIconName } from '@/components/base/icon.tsx';
 
 const ITEM_HEIGHT = rpx(108);
 
@@ -83,7 +83,7 @@ function HomeDrawer(props: any) {
             <DrawerContentScrollView {...[props]} style={style.scrollWrapper}>
                 <View style={style.header}>
                     <ThemeText fontSize="appbar" fontWeight="bold">
-                        MusicFree
+                        {DeviceInfo.getApplicationName()}
                     </ThemeText>
                     {/* <IconButton icon={'qrcode-scan'} size={rpx(36)} /> */}
                 </View>
@@ -140,7 +140,7 @@ function HomeDrawer(props: any) {
                         </ListItem.ListItemText>
                     </ListItem>
 
-                    {/* <ListItem
+                    <ListItem
                         withHorizontalPadding
                         key={'update'}
                         onPress={() => {
@@ -156,7 +156,7 @@ function HomeDrawer(props: any) {
                             fontSize="subTitle">
                             {`当前版本: ${deviceInfoModule.getVersion()}`}
                         </ListItem.ListItemText>
-                    </ListItem> */}
+                    </ListItem>
                     <ListItem
                         withHorizontalPadding
                         key={'about'}
@@ -168,12 +168,12 @@ function HomeDrawer(props: any) {
                             width={rpx(48)}
                         />
                         <ListItem.Content
-                            title={`关于 MusicFree`}
+                            title={`关于 ${deviceInfoModule.getApplicationName()}`}
                         />
                     </ListItem>
                 </View>
 
-                {/* <Divider />
+                <Divider />
                 <ListItem
                     withHorizontalPadding
                     onPress={() => {
@@ -197,7 +197,7 @@ function HomeDrawer(props: any) {
                         width={rpx(48)}
                     />
                     <ListItem.Content title={'退出应用'} />
-                </ListItem> */}
+                </ListItem>
             </DrawerContentScrollView>
         </>
     );

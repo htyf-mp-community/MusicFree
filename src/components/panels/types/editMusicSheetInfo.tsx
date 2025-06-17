@@ -32,19 +32,19 @@ export default function EditMusicSheetInfo(props: IEditSheetDetailProps) {
   const [title, setTitle] = useState(musicSheet?.title);
 
   const onChangeCoverPress = async () => {
-      try {
-          const result = await launchImageLibrary({
-              mediaType: 'photo',
-          });
-          const uri = result.assets?.[0].uri;
-          if (!uri) {
-              return;
-          }
-          console.log(uri);
-          setCoverImg(uri);
-      } catch (e) {
-          console.log(e);
+    try {
+      const result = await launchImageLibrary({
+        mediaType: 'photo',
+      });
+      const uri = result.assets?.[0].uri;
+      if (!uri) {
+        return;
       }
+      console.log(uri);
+      setCoverImg(uri);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   function onTitleChange(_: string) {
@@ -63,24 +63,24 @@ export default function EditMusicSheetInfo(props: IEditSheetDetailProps) {
 
     let newCoverImg = coverImg;
     if (coverImg && coverImg !== musicSheet?.coverImg) {
-        newCoverImg = addFileScheme(
-          `${pathConst.dataPath}sheet${musicSheet.id}${coverImg.substring(
-            coverImg.lastIndexOf('.'),
-          )}`,
-        );
-        try {
-          if ((await exists(newCoverImg))) {
-            await unlink(newCoverImg);
-          }
-
-          // Copy
-          const rawImage = await readAsStringAsync(coverImg, {
-            encoding: 'base64'
-          });
-          await writeFile(newCoverImg, rawImage, 'base64');
-        } catch (e) {
-            console.log(e);
+      newCoverImg = addFileScheme(
+        `${pathConst.dataPath}sheet${musicSheet.id}${coverImg.substring(
+          coverImg.lastIndexOf('.'),
+        )}`,
+      );
+      try {
+        if ((await exists(newCoverImg))) {
+          await unlink(newCoverImg);
         }
+
+        // Copy
+        const rawImage = await readAsStringAsync(coverImg, {
+          encoding: 'base64'
+        });
+        await writeFile(newCoverImg, rawImage, 'base64');
+      } catch (e) {
+        console.log(e);
+      }
     }
     let _title = title;
     if (!_title?.length) {
@@ -103,18 +103,18 @@ export default function EditMusicSheetInfo(props: IEditSheetDetailProps) {
           编辑歌单信息
         </AppBar>
         <View style={style.row}>
-            <ThemeText>封面</ThemeText>
-            <TouchableOpacity
-                onPress={onChangeCoverPress}
-                onLongPress={() => {
-                    setCoverImg(undefined);
-                }}>
-                <Image
-                    style={style.coverImg}
-                    uri={coverImg}
-                    emptySrc={ImgAsset.albumDefault}
-                />
-            </TouchableOpacity>
+          <ThemeText>封面</ThemeText>
+          <TouchableOpacity
+            onPress={onChangeCoverPress}
+            onLongPress={() => {
+              setCoverImg(undefined);
+            }}>
+            <Image
+              style={style.coverImg}
+              uri={coverImg}
+              emptySrc={ImgAsset.albumDefault}
+            />
+          </TouchableOpacity>
         </View>
         <View style={style.row}>
           <ThemeText>歌单名</ThemeText>

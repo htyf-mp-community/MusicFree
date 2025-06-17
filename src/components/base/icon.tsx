@@ -70,7 +70,6 @@ import TrashOutlineIcon from '@/assets/icons/trash-outline.svg';
 import TrophyIcon from '@/assets/icons/trophy.svg';
 import UserIcon from '@/assets/icons/user.svg';
 import XMarkIcon from '@/assets/icons/x-mark.svg';
-import { View } from 'react-native';
 
 export type IIconName =
     | 'alarm-outline'
@@ -149,8 +148,6 @@ interface IProps extends SvgProps {
     /** 图标大小 */
     size?: number;
 }
-
-console.error(11111, 222, AlarmOutlineIcon)
 
 const iconMap = {
     'alarm-outline': AlarmOutlineIcon,
@@ -234,5 +231,6 @@ export default function Icon(props: IProps) {
     } as SvgProps;
 
     const Component = iconMap[name];
+
     return <Component {...newProps} />;
 }

@@ -1,7 +1,7 @@
-import {ROUTE_PATH} from '@/core/router';
-import {useNavigation} from '@react-navigation/native';
+import { ROUTE_PATH } from '@/core/router';
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import {Pressable, StyleSheet, View} from 'react-native';
+import { Pressable, StyleSheet, View } from 'react-native';
 import rpx from '@/utils/rpx';
 import useColors from '@/hooks/useColors';
 import ThemeText from '@/components/base/themeText';

@@ -8,34 +8,16 @@ import PersistStatus from "@/core/persistStatus.ts";
 
 let resumeState: State | null;
 module.exports = async function () {
-    RNTrackPlayer.addEventListener(Event.RemotePlay, () => {
-        try {
-            TrackPlayer.play();
-        } catch (error) {
-            console.error(error);
-        }
-    });
-    RNTrackPlayer.addEventListener(Event.RemotePause, () => {
-        try {
-            TrackPlayer.pause();
-        } catch (error) {
-            console.error(error);
-        }
-    });
-    RNTrackPlayer.addEventListener(Event.RemotePrevious, () => {
-        try {
-            TrackPlayer.skipToPrevious();
-        } catch (error) {
-            console.error(error);
-        }
-    });
-    RNTrackPlayer.addEventListener(Event.RemoteNext, () => {
-        try {
-            TrackPlayer.skipToNext();
-        } catch (error) {
-            console.error(error);
-        }
-    });
+    RNTrackPlayer.addEventListener(Event.RemotePlay, () => TrackPlayer.play());
+    RNTrackPlayer.addEventListener(Event.RemotePause, () =>
+        TrackPlayer.pause(),
+    );
+    RNTrackPlayer.addEventListener(Event.RemotePrevious, () =>
+        TrackPlayer.skipToPrevious(),
+    );
+    RNTrackPlayer.addEventListener(Event.RemoteNext, () =>
+        TrackPlayer.skipToNext(),
+    );
     RNTrackPlayer.addEventListener(
         Event.RemoteDuck,
         async ({paused, permanent}) => {
@@ -54,48 +36,29 @@ module.exports = async function () {
                 } else {
                     return RNTrackPlayer.setVolume(1);
                 }
-                if (permanent) {
+            } else {
+                if (paused) {
+                    resumeState =
+                        (await RNTrackPlayer.getPlaybackState()).state ??
+                        State.Paused;
                     return TrackPlayer.pause();
-                }
-                const tempRemoteDuckConf = Config.get(
-                    'setting.basic.tempRemoteDuck',
-                );
-                if (tempRemoteDuckConf === '降低音量') {
-                    if (paused) {
-                        return RNTrackPlayer.setVolume(0.5);
-                    } else {
-                        return RNTrackPlayer.setVolume(1);
-                    }
                 } else {
-                    if (paused) {
-                        resumeState =
-                            (await RNTrackPlayer.getPlaybackState()).state ??
-                            State.Paused;
-                        return TrackPlayer.pause();
-                    } else {
-                        if (resumeState && !musicIsPaused(resumeState)) {
-                            resumeState = null;
-                            return TrackPlayer.play();
-                        }
+                    if (resumeState && !musicIsPaused(resumeState)) {
                         resumeState = null;
+                        return TrackPlayer.play();
                     }
+                    resumeState = null;
                 }
-            } catch (error) {
-                console.error(error);
             }
         },
     );
 
     RNTrackPlayer.addEventListener(Event.PlaybackActiveTrackChanged, () => {
-        try {
-            const currentMusicItem = TrackPlayer.getCurrentMusic();
-            if (currentMusicItem) {
-                LyricUtil.setStatusBarLyricText(
-                    `${currentMusicItem.title} - ${currentMusicItem.artist}`,
-                );
-            }
-        } catch (error) {
-            console.error(error);
+        const currentMusicItem = TrackPlayer.getCurrentMusic();
+        if (currentMusicItem) {
+            LyricUtil.setStatusBarLyricText(
+                `${currentMusicItem.title} - ${currentMusicItem.artist}`,
+            );
         }
     });
 
@@ -119,36 +82,16 @@ module.exports = async function () {
                                 ? `\n${currentLyricItem?.translation ?? ''}`
                                 : ''),
                     );
-                    if (Config.get('setting.lyric.showStatusBarLyric')) {
-                        LyricUtil.setStatusBarLyricText(
-                            (currentLyricItem?.lrc ?? '') +
-                                (showTranslation
-                                    ? `\n${
-                                          parser.getTranslationLyric()?.[
-                                              currentLyricItem?.index!
-                                          ]?.lrc || ''
-                                      }`
-                                    : ''),
-                        );
-                    }
                 }
             }
         }
     });
 
     RNTrackPlayer.addEventListener(Event.RemoteStop, async () => {
-        try {
-            RNTrackPlayer.stop();
-        } catch (error) {
-            console.error(error);
-        }
+        RNTrackPlayer.stop();
     });
 
     RNTrackPlayer.addEventListener(Event.RemoteSeek, async evt => {
-        try {
-            TrackPlayer.seekTo(evt.position);
-        } catch (error) {
-            console.error(error);
-        }
+        TrackPlayer.seekTo(evt.position);
     });
 };

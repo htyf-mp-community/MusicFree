@@ -18,7 +18,6 @@ import TrackPlayer from "@/core/trackPlayer";
 import musicHistory from "@/core/musicHistory";
 import PersistStatus from "@/core/persistStatus.ts";
 import { perfLogger } from "@/utils/perfLogger";
-import * as SplashScreen from "expo-splash-screen";
 import MusicSheet from "@/core/musicSheet";
 import NativeUtils from "@/native/utils";
 import { showDialog } from "@/components/dialogs/useDialog.ts";

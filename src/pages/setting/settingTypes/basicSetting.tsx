@@ -58,9 +58,9 @@ const createRadio = function (
             title,
             content: valueMap
                 ? candidates.map(_ => ({
-                      label: valueMap[_] as string,
-                      value: _,
-                  }))
+                    label: valueMap[_] as string,
+                    value: _,
+                }))
                 : candidates,
             onOk(val) {
                 Config.setConfig(changeKey, val);
@@ -523,7 +523,7 @@ export default function BasicSetting() {
                         try {
                             await clearLog();
                             Toast.success('日志已清空');
-                        } catch {}
+                        } catch { }
                     },
                 },
             ],
@@ -538,7 +538,7 @@ export default function BasicSetting() {
                 contentContainerStyle={styles.headerContentContainer}
                 horizontal
                 data={basicOptions.map(it => it.title)}
-                renderItem={({item, index}) => (
+                renderItem={({ item, index }) => (
                     <TouchableOpacity
                         onPress={() => {
                             sectionListRef.current?.scrollToLocation({
@@ -554,7 +554,7 @@ export default function BasicSetting() {
             />
             <SectionList
                 sections={basicOptions}
-                renderSectionHeader={({section}) => (
+                renderSectionHeader={({ section }) => (
                     <View style={styles.sectionHeader}>
                         <ThemeText
                             fontSize="subTitle"
@@ -565,10 +565,10 @@ export default function BasicSetting() {
                     </View>
                 )}
                 ref={sectionListRef}
-                renderSectionFooter={({section}) => {
+                renderSectionFooter={({ section }) => {
                     return section.footer ?? null;
                 }}
-                renderItem={({item}) => {
+                renderItem={({ item }) => {
                     const Right = item.right;
 
                     return (
@@ -650,7 +650,7 @@ function LyricSetting() {
     const autoSearchLyric = createSwitch(
         '歌词缺失时自动搜索歌词',
         'lyric.autoSearchLyric',
-      enableAutoSearchLyric ?? false,
+        enableAutoSearchLyric ?? false,
     );
 
     const openStatusBarLyric = createSwitch(
@@ -674,8 +674,8 @@ function LyricSetting() {
                             fontSize: Config.getConfig("lyric.fontSize")
                         };
                         LyricUtil.showStatusBarLyric(
-                          "MusicFree",
-                          statusBarLyricConfig ?? {}
+                            "MusicFree",
+                            statusBarLyricConfig ?? {}
                         );
                         Config.setConfig('lyric.showStatusBarLyric', true);
                     } else {
@@ -687,7 +687,7 @@ function LyricSetting() {
                     LyricUtil.hideStatusBarLyric();
                     Config.setConfig('lyric.showStatusBarLyric', false);
                 }
-            } catch {}
+            } catch { }
         },
     );
 

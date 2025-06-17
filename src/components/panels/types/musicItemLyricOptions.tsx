@@ -45,7 +45,7 @@ interface IOption {
 export default function MusicItemLyricOptions(
     props: IMusicItemLyricOptionsProps,
 ) {
-    const {musicItem} = props ?? {};
+    const { musicItem } = props ?? {};
 
     const platformHash = CryptoJs.MD5(musicItem.platform).toString(
         CryptoJs.enc.Hex,
@@ -102,9 +102,8 @@ export default function MusicItemLyricOptions(
         },
         {
             icon: 'lyric',
-            title: `${
-                Config.getConfig('lyric.showStatusBarLyric') ? '关闭' : '开启'
-            }桌面歌词`,
+            title: `${Config.getConfig('lyric.showStatusBarLyric') ? '关闭' : '开启'
+                }桌面歌词`,
             async onPress() {
                 const showStatusBarLyric = Config.getConfig('lyric.showStatusBarLyric');
                 if (!showStatusBarLyric) {
@@ -122,8 +121,8 @@ export default function MusicItemLyricOptions(
                             fontSize: Config.getConfig("lyric.fontSize")
                         };
                         LyricUtil.showStatusBarLyric(
-                          "MusicFree",
-                          statusBarLyricConfig ?? {}
+                            "MusicFree",
+                            statusBarLyricConfig ?? {}
                         );
                         Config.setConfig('lyric.showStatusBarLyric', true);
                     } else {
@@ -161,10 +160,10 @@ export default function MusicItemLyricOptions(
 
                     await RNFS.writeFile(
                         pathConst.localLrcPath +
-                            platformHash +
-                            '/' +
-                            idHash +
-                            '.lrc',
+                        platformHash +
+                        '/' +
+                        idHash +
+                        '.lrc',
                         lyricContent,
                         'utf8',
                     );
@@ -200,10 +199,10 @@ export default function MusicItemLyricOptions(
 
                     await RNFS.writeFile(
                         pathConst.localLrcPath +
-                            platformHash +
-                            '/' +
-                            idHash +
-                            '.tran.lrc',
+                        platformHash +
+                        '/' +
+                        idHash +
+                        '.tran.lrc',
                         lyricContent,
                         'utf8',
                     );
@@ -224,8 +223,8 @@ export default function MusicItemLyricOptions(
                     const basePath =
                         pathConst.localLrcPath + platformHash + '/' + idHash;
 
-                    await RNFS.unlink(basePath + '.lrc').catch(() => {});
-                    await RNFS.unlink(basePath + '.tran.lrc').catch(() => {});
+                    await RNFS.unlink(basePath + '.lrc').catch(() => { });
+                    await RNFS.unlink(basePath + '.tran.lrc').catch(() => { });
 
                     toast.success('删除成功');
                     LyricManager.refreshLyric(false, true);
@@ -278,7 +277,7 @@ export default function MusicItemLyricOptions(
                                 },
                             ]}
                             keyExtractor={_ => _.title}
-                            renderItem={({item}) =>
+                            renderItem={({ item }) =>
                                 item.show !== false ? (
                                     <ListItem
                                         withHorizontalPadding

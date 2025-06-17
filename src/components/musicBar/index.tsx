@@ -1,14 +1,14 @@
-import React, {memo, useEffect, useState} from 'react';
-import {Keyboard, StyleSheet, View} from 'react-native';
+import React, { memo, useEffect, useState } from 'react';
+import { Keyboard, StyleSheet, View } from 'react-native';
 import rpx from '@/utils/rpx';
-import {CircularProgressBase} from 'react-native-circular-progress-indicator';
+import { CircularProgressBase } from 'react-native-circular-progress-indicator';
 
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {showPanel} from '../panels/usePanel';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { showPanel } from '../panels/usePanel';
 import useColors from '@/hooks/useColors';
 import IconButton from '../base/iconButton';
 import TrackPlayer from '@/core/trackPlayer';
-import {musicIsPaused} from '@/utils/trackUtils';
+import { musicIsPaused } from '@/utils/trackUtils';
 import MusicInfo from './musicInfo';
 import Icon from '@/components/base/icon.tsx';
 import jssdk from '@htyf-mp/js-sdk';
@@ -92,9 +92,9 @@ function MusicBar() {
                     ]}
                     accessible
                     accessibilityLabel={`歌曲: ${musicItem.title} 歌手: ${musicItem.artist}`}
-                    // onPress={() => {
-                    //     navigate(ROUTE_PATH.MUSIC_DETAIL);
-                    // }}
+                // onPress={() => {
+                //     navigate(ROUTE_PATH.MUSIC_DETAIL);
+                // }}
                 >
                     <MusicInfo musicItem={musicItem} />
                     <View style={style.actionGroup}>
