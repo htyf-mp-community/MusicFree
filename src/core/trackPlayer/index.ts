@@ -7,7 +7,7 @@ import ReactNativeTrackPlayer, {
     usePlaybackState,
     useProgress
 } from "react-native-track-player";
-import shuffle from "lodash.shuffle";
+import shuffle from "lodash/shuffle";
 import Config from "../config.ts";
 import { EDeviceEvents, internalFakeSoundKey, sortIndexSymbol, timeStampSymbol } from "@/constants/commonConst";
 import { GlobalState } from "@/utils/stateMapper";

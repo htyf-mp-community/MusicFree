@@ -39,19 +39,21 @@ async function _bootstrap() {
             showDialog('CheckStorage');
         }
     } else {
-        const [readStoragePermission, writeStoragePermission] =
-            await Promise.all([
-                check(PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE),
-                check(PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE),
-            ]);
-        if (
-            !(
-                readStoragePermission === 'granted' &&
-                writeStoragePermission === 'granted'
-            )
-        ) {
-            await request(PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE);
-            await request(PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE);
+        if (Platform.OS === 'android') {
+            const [readStoragePermission, writeStoragePermission] =
+                await Promise.all([
+                    check(PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE),
+                    check(PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE),
+                ]);
+            if (
+                !(
+                    readStoragePermission === 'granted' &&
+                    writeStoragePermission === 'granted'
+                )
+            ) {
+                await request(PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE);
+                await request(PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE);
+            }
         }
     }
     logger.mark('权限检查完成');

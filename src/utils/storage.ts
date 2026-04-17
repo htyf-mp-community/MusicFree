@@ -1,8 +1,8 @@
 import {errorLog} from '@/utils/log';
 import ReactNativeBlobUtil from 'react-native-blob-util'
 import { MultiGetCallback } from '@react-native-async-storage/async-storage/lib/typescript/types';
-import { MMKV } from 'react-native-mmkv';
-const AsyncStorage = new MMKV({
+import { createMMKV } from 'react-native-mmkv';
+const AsyncStorage = createMMKV({
     id: 'musicfree',
     path: `${ReactNativeBlobUtil.fs.dirs.DocumentDir}/musicfree`,
     encryptionKey: `musicfree`
@@ -51,5 +51,5 @@ export async function getMultiStorage(keys: string[]) {
 }
 
 export async function removeStorage(key: string) {
-    return AsyncStorage.delete(key);
+    return AsyncStorage.remove(key);
 }

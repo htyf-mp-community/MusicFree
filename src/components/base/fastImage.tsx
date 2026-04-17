@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import FastImage, {FastImageProps} from 'react-native-fast-image';
+import FastImage, {FastImageProps} from '@d11/react-native-fast-image';
 
 interface IFastImageProps {
     style: FastImageProps['style'];

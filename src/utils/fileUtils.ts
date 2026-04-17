@@ -1,5 +1,5 @@
 import pathConst from '@/constants/pathConst';
-import FastImage from 'react-native-fast-image';
+import FastImage from '@d11/react-native-fast-image';
 import * as RNFS from '@dr.pogodin/react-native-fs';
 import {
     copyFile,

@@ -37,7 +37,7 @@ const setMediaCache = (mediaItem: ICommon.IMediaBase) => {
                     : null;
                 clearLocalCaches(cacheData);
 
-                mediaCacheStore.delete(allKeys[i]);
+                mediaCacheStore.remove(allKeys[i]);
             }
         }
 
@@ -68,7 +68,7 @@ async function checkPathAndRemove(filePath?: string) {
 /** 移除缓存信息 */
 const removeMediaCache = (mediaItem: ICommon.IMediaBase) => {
     if (mediaItem.platform && mediaItem.id) {
-        mediaCacheStore.delete(getMediaKey(mediaItem));
+        mediaCacheStore.remove(getMediaKey(mediaItem));
     }
 
     return false;

@@ -2,7 +2,7 @@ import TrackPlayer from '@/core/trackPlayer';
 import NativeUtils from '@/native/utils';
 import StateMapper from '@/utils/stateMapper';
 import {useEffect, useRef, useState} from 'react';
-import BackgroundTimer from 'react-native-background-timer';
+import BackgroundTimer from '@boterop/react-native-background-timer';
 // import TrackPlayer from "react-native-track-player";
 
 let deadline: number | null = null;

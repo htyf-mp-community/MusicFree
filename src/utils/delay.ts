@@ -1,4 +1,4 @@
-import BackgroundTimer from 'react-native-background-timer';
+import BackgroundTimer from '@boterop/react-native-background-timer';
 
 export default function (millsecond: number) {
     return new Promise<void>(resolve => {

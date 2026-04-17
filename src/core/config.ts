@@ -191,7 +191,7 @@ async function setup() {
 
 function setConfig<K extends ConfigKey>(key: K, value?: IConfig[K]) {
     if (value === undefined) {
-        configStore.delete(key);
+        configStore.remove(key);
     } else {
         configStore.set(key, safeStringify(value));
     }

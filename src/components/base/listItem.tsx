@@ -18,7 +18,7 @@ import {
     iconSizeConst,
 } from '@/constants/uiConst';
 import FastImage from './fastImage';
-import {ImageStyle} from 'react-native-fast-image';
+import {ImageStyle} from '@d11/react-native-fast-image';
 import Icon, {IIconName} from '@/components/base/icon.tsx';
 
 interface IListItemProps {
