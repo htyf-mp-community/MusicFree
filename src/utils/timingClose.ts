@@ -2,6 +2,7 @@ import TrackPlayer from '@/core/trackPlayer';
 import NativeUtils from '@/native/utils';
 import StateMapper from '@/utils/stateMapper';
 import {useEffect, useRef, useState} from 'react';
+import {AppState} from 'react-native';
 import BackgroundTimer from '@boterop/react-native-background-timer';
 // import TrackPlayer from "react-native-track-player";
 
@@ -40,22 +41,45 @@ function useTimingClose() {
     const intervalRef = useRef<any>();
 
     useEffect(() => {
-        // deadline改变时，更新定时器
-        // 清除原有的定时器
         intervalRef.current && clearInterval(intervalRef.current);
         intervalRef.current = null;
 
-        // 清空定时
         if (!_deadline || _deadline <= Date.now()) {
             setCountDown(null);
             return;
-        } else {
-            // 更新倒计时
-            setCountDown(Math.max(_deadline - Date.now(), 0) / 1000);
-            intervalRef.current = setInterval(() => {
-                setCountDown(Math.max(_deadline - Date.now(), 0) / 1000);
-            }, 1000);
         }
+
+        const tick = () => {
+            setCountDown(Math.max(_deadline - Date.now(), 0) / 1000);
+        };
+
+        const startUiInterval = () => {
+            intervalRef.current && clearInterval(intervalRef.current);
+            intervalRef.current = setInterval(tick, 1000);
+        };
+
+        tick();
+
+        const onAppStateChange = () => {
+            if (AppState.currentState === 'background') {
+                intervalRef.current && clearInterval(intervalRef.current);
+                intervalRef.current = null;
+                return;
+            }
+            tick();
+            startUiInterval();
+        };
+
+        if (AppState.currentState !== 'background') {
+            startUiInterval();
+        }
+
+        const sub = AppState.addEventListener('change', onAppStateChange);
+        return () => {
+            sub.remove();
+            intervalRef.current && clearInterval(intervalRef.current);
+            intervalRef.current = null;
+        };
     }, [_deadline]);
 
     return countDown;

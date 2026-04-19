@@ -111,6 +111,7 @@ async function _bootstrap() {
           ];
     await RNTrackPlayer.updateOptions({
         icon: ImgAsset.logoTransparent,
+        // 默认前台间隔；后台由 usePlaybackProgressIntervalForAppState 动态调大
         progressUpdateEventInterval: 1,
         android: {
             alwaysPauseOnInterruption: true,
