@@ -672,8 +672,10 @@ const play = async (
                     cancelText: '知道了',
                     okText: '立即播放',
                     onOk: () => {
-                        Config.set('setting.basic.useCelluarNetworkPlay', true);
-                        play(musicItem, forcePlay);
+                        Config.setConfig('basic.useCelluarNetworkPlay', true);
+                        setTimeout(() => {
+                            play(musicItem, forcePlay);
+                        }, 0)
                     }
                 });
             }
