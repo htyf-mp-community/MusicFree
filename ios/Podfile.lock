@@ -2405,9 +2405,35 @@ PODS:
     - ReactCommon/turbomodule/core
     - SocketRocket
     - Yoga
-  - react-native-track-player (4.1.2):
+  - react-native-track-player (5.0.0-alpha0-nightly-359af5a12d712d3b685530aed9b9625865a25d74):
+    - boost
+    - DoubleConversion
+    - fast_float
+    - fmt
+    - glog
+    - hermes-engine
+    - RCT-Folly
+    - RCT-Folly/Fabric
+    - RCTRequired
+    - RCTTypeSafety
     - React-Core
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-ImageManager
+    - React-jsi
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-renderercss
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - SocketRocket
     - SwiftAudioEx (= 1.1.0)
+    - Yoga
   - React-NativeModulesApple (0.83.5):
     - boost
     - DoubleConversion
@@ -3932,7 +3958,7 @@ SPEC CHECKSUMS:
   react-native-pager-view: 899d0774fc9602b6a46eb2ac08febc09f470534d
   react-native-safe-area-context: 84a754cad3fbb25117482cde6b8defca6c6f6a53
   react-native-slider: 4faf1b2266c73f1afb7b30cc6ebb3df238a37c0b
-  react-native-track-player: dd56f9948e03756a217c75e0a61aa04aab65b5a1
+  react-native-track-player: a53dc082d8c296b99ca2656b01c55260b6ffeefb
   React-NativeModulesApple: 9070626e7bc2b0b1efd106ce5ff9d4c207ef0ad6
   React-networking: e26aade54c2eeff9f1e60336e26202965895dc2a
   React-oscompat: 7427e1c3527c66edd789d63d0603c68b52b50a12

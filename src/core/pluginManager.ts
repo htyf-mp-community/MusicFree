@@ -13,7 +13,7 @@ import dayjs from "dayjs";
 import axios from "axios";
 import bigInt from "big-integer";
 import qs from "qs";
-// import * as webdav from "webdav";
+import * as webdav from "webdav";
 import { InteractionManager, ToastAndroid } from "react-native";
 import pathConst from "@/constants/pathConst";
 import { compare, satisfies } from "compare-versions";
@@ -74,7 +74,7 @@ const packages: Record<string, any> = {
     qs,
     he,
     '@react-native-cookies/cookies': deprecatedCookieManager,
-    // webdav,
+    webdav,
 };
 
 const _require = (packageName: string) => {
