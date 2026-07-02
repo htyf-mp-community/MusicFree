@@ -4,12 +4,12 @@
   "htyf": {
     "type": "app",
     "entry": "./src/index.tsx",
-    "version": "0.0.38",
-    "name": "音乐基地",
+    "version": "0.0.40",
+    "name": "MusicFree",
     "appid": "plugin_music",
     "rotate": "portrait",
     "appUrlConfig": "https://raw.githubusercontent.com/htyf-mp-community/demo/main/v2/plugin_music/latest/app.json",
     "zipUrl": "https://raw.githubusercontent.com/htyf-mp-community/demo/main/v2/plugin_music/latest/dist.dgz",
-    "projectname": "音乐基地"
+    "projectname": "MusicFree"
   }
 }
