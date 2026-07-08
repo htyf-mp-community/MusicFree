@@ -15,7 +15,7 @@
     "@callstack/repack": "5.2.5",
     "@d11/react-native-fast-image": "8.13.0",
     "@dr.pogodin/react-native-fs": "2.38.2",
-    "@htyf-mp/cli": "0.3.0",
+    "@htyf-mp/cli": "0.3.3",
     "@htyf-mp/js-sdk": "0.2.20",
     "@react-native-async-storage/async-storage": "3.0.2",
     "@react-native-clipboard/clipboard": "1.16.3",

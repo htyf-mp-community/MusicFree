@@ -1876,10 +1876,10 @@
   dependencies:
     "@hapi/hoek" "^9.0.0"
 
-"@htyf-mp/cli@0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@htyf-mp/cli/-/cli-0.3.0.tgz#f11732f582885c73cab52c9407228b900520678e"
-  integrity sha512-OwJRMeRbY6SrYTHmiBlbcCNgvDmkCkPQo1fM9HRFD+Lf2iRTjvkS2JBikjBjP3fAw8q1dca38E+SLhYmQZyQ3Q==
+"@htyf-mp/cli@0.3.3":
+  version "0.3.3"
+  resolved "https://registry.yarnpkg.com/@htyf-mp/cli/-/cli-0.3.3.tgz#02ce5a13282a5ca2c797e8e0b2c04bd028afc585"
+  integrity sha512-atcKDs5Dvj7UZDo3CStHo78NVUbMTmJGPM3Q3DqHoxsSEPMHIdTiqrHhkWgDYkakY4xVsq2HpemS0MenZQp/Eg==
   dependencies:
     "@babel/core" "7.29.0"
     "@babel/plugin-proposal-decorators" "7.29.0"
