@@ -38,6 +38,7 @@ export default function SheetMusicList(props: IMusicListProps) {
                         }
                         musicList={musicList}
                         onItemPress={(musicItem, musicList) => {
+                            console.error(musicItem)
                             if (
                                 Config.getConfig(
                                     'basic.clickMusicInAlbum',
@@ -45,10 +46,14 @@ export default function SheetMusicList(props: IMusicListProps) {
                             ) {
                                 TrackPlayer.play(musicItem);
                             } else {
-                                TrackPlayer.playWithReplacePlayList(
-                                    musicItem,
-                                    musicList ?? [musicItem],
-                                );
+                                try {
+                                    TrackPlayer.playWithReplacePlayList(
+                                        musicItem,
+                                        musicList ?? [musicItem],
+                                    );
+                                } catch (error) {
+                                    console.error(error)
+                                }
                             }
                         }}
                         onEndReached={() => {

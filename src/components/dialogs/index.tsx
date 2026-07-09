@@ -10,6 +10,7 @@ export default function () {
         ? components[dialogInfoState.name]
         : null;
 
+    console.error(dialogInfoState.name, dialogInfoState.payload, Component);
     return (
         <Portal>
             {Component ? (

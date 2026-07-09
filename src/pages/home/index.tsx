@@ -46,10 +46,15 @@ function Home() {
                         'type': 'warn',
                         'actionText': "查看",
                         'onActionClick': () => {
-                            showDialog('SimpleDialog', {
-                                title: "插件安装失败",
-                                content: "以下插件安装失败: \n" + failResults.map(it => (it.pluginUrl ?? "") + "\n失败原因：" + it.message).join('\n-----\n'),
-                            })
+                            try {
+                                showDialog('SimpleDialog', {
+                                    title: "插件安装失败",
+                                    content: "以下插件安装失败: \n" + failResults.map(it => (it.pluginUrl ?? "") + "\n失败原因：" + it.message).join('\n-----\n'),
+                                })
+                            } catch(err){
+                                console.error(err);
+                            }
+                           
                         }
                     });
                 }
@@ -61,8 +66,7 @@ function Home() {
                 console.error(error);
             }
         }
-        init();
-        console.error(111)
+        // init();
         if (plugins.length <= 0) {
           
             jssdk.showModal({

@@ -33,7 +33,7 @@ function Dialog(props: IDialogProps) {
 
     const sharedShowValue = useSharedValue(0);
     const colors = useColors();
-    const backHandlerRef = useRef<NativeEventSubscription>();
+    const backHandlerRef = useRef<NativeEventSubscription>(undefined);
     const orientation = useOrientation();
 
     // 对话框宽度
@@ -47,7 +47,7 @@ function Dialog(props: IDialogProps) {
               };
 
     useEffect(() => {
-        sharedShowValue.value = 1;
+        sharedShowValue.value = 1
         if (backHandlerRef.current) {
             backHandlerRef.current?.remove();
             backHandlerRef.current = undefined;
@@ -71,10 +71,7 @@ function Dialog(props: IDialogProps) {
 
     const containerStyle = useAnimatedStyle(() => {
         return {
-            opacity: withTiming(
-                sharedShowValue.value,
-                timingConfig.animationFast,
-            ),
+            opacity: sharedShowValue.value,
         };
     });
 
@@ -102,7 +99,7 @@ function Dialog(props: IDialogProps) {
                 style={[
                     styles.dialogContainer,
                     dialogContainerStyle,
-                    containerStyle,
+                    // containerStyle,
                     scaleAnimationStyle,
                     {
                         backgroundColor: colors.backdrop,

@@ -186,6 +186,23 @@ async function setupTrackPlayer() {
 }
 
 /**
+ * 移除 undefined 字段，避免传给原生桥时出错。
+ */
+const stripUndefined = <T extends Record<string, unknown>>(obj: T): T =>
+    Object.fromEntries(
+        Object.entries(obj).filter(([, value]) => value !== undefined),
+    ) as T;
+
+/**
+ * setQueue 不会解析 require() 资源，而 add/load 会。
+ * 队列中的 fake 音轨 url 是本地资源 ID，直接 setQueue 会在 iOS 原生层崩溃。
+ */
+const replacePlayerQueue = async (tracks: Track[]) => {
+    await ReactNativeTrackPlayer.reset();
+    await ReactNativeTrackPlayer.add(tracks.map(stripUndefined));
+};
+
+/**
  * 获取自动播放的下一个track
  */
 const getFakeNextTrack = () => {
@@ -411,10 +428,10 @@ const pause = async () => {
 
 /** 设置音源 */
 const setTrackSource = async (track: Track, autoPlay = true) => {
-    if (!track.artwork?.trim()?.length) {
+    if (typeof track.artwork === 'string' && !track.artwork.trim().length) {
         track.artwork = undefined;
     }
-    await ReactNativeTrackPlayer.setQueue([track, getFakeNextTrack()]);
+    await replacePlayerQueue([track, getFakeNextTrack()]);
     PersistStatus.set('music.musicItem', track as IMusic.IMusicItem);
     PersistStatus.set('music.progress', 0);
     if (autoPlay) {
@@ -635,27 +652,27 @@ const play = async (
         // 9. 设置音源
         await setTrackSource(track as Track);
 
-        // 10. 获取补充信息
-        let info: Partial<IMusic.IMusicItem> | null = null;
-        try {
-            info = (await plugin?.methods?.getMusicInfo?.(musicItem)) ?? null;
-            if (
-                (typeof info?.url === 'string' && info.url.trim() === '') ||
-                (info?.url && typeof info.url !== 'string')
-            ) {
-                delete info.url;
-            }
-        } catch {}
+        // // 10. 获取补充信息
+        // let info: Partial<IMusic.IMusicItem> | null = null;
+        // try {
+        //     info = (await plugin?.methods?.getMusicInfo?.(musicItem)) ?? null;
+        //     if (
+        //         (typeof info?.url === 'string' && info.url.trim() === '') ||
+        //         (info?.url && typeof info.url !== 'string')
+        //     ) {
+        //         delete info.url;
+        //     }
+        // } catch {}
 
-        // 11. 设置补充信息
-        if (info && isCurrentMusic(musicItem)) {
-            const mergedTrack = mergeProps(track, info);
-            currentMusicStore.setValue(mergedTrack as IMusic.IMusicItem);
-            await ReactNativeTrackPlayer.updateMetadataForTrack(
-                0,
-                mergedTrack as TrackMetadataBase,
-            );
-        }
+        // // 11. 设置补充信息
+        // if (info && isCurrentMusic(musicItem)) {
+        //     const mergedTrack = mergeProps(track, info);
+        //     currentMusicStore.setValue(mergedTrack as IMusic.IMusicItem);
+        //     await ReactNativeTrackPlayer.updateMetadataForTrack(
+        //         0,
+        //         mergedTrack as TrackMetadataBase,
+        //     );
+        // }
     } catch (e: any) {
         const message = e?.message;
         if (
