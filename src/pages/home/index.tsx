@@ -61,7 +61,10 @@ function Home() {
                 console.error(error);
             }
         }
+        init();
+        console.error(111)
         if (plugins.length <= 0) {
+          
             jssdk.showModal({
                 title: '是否添加插件',
                 description: '尝试添加默认插件',

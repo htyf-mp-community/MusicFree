@@ -9,7 +9,8 @@
     "ios": "react-native run-ios",
     "lint": "eslint .",
     "start": "react-native start",
-    "test": "jest"
+    "test": "jest",
+    "postinstall": "patch-package"
   },
   "dependencies": {
     "@boterop/react-native-background-timer": "2.6.0",
@@ -100,6 +101,7 @@
     "babel-plugin-module-resolver": "5.0.3",
     "eslint": "10.4.0",
     "jest": "30.4.2",
+    "patch-package": "^8.0.1",
     "prettier": "3.8.3",
     "react-test-renderer": "19.2.0",
     "typescript": "6.0.3",
