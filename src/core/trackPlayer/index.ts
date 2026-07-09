@@ -19,15 +19,15 @@ import {
     mergeProps,
     sortByTimestampAndIndex
 } from "@/utils/mediaItem";
-import Network from "../network";
-import LocalMusicSheet from "../localMusicSheet";
+import Network from "../network.ts";
+import LocalMusicSheet from "../localMusicSheet.ts";
 import { SoundAsset } from "@/constants/assetsConst";
 import { getQualityOrder } from "@/utils/qualities";
-import musicHistory from "../musicHistory";
+import musicHistory from "../musicHistory.ts";
 import getUrlExt from "@/utils/getUrlExt";
 import { DeviceEventEmitter } from "react-native";
-import LyricManager from "../lyricManager";
-import { MusicRepeatMode } from "./common";
+import LyricManager from "../lyricManager.ts";
+import { MusicRepeatMode } from "./common.ts";
 import {
     getMusicIndex,
     getPlayList,
@@ -36,9 +36,9 @@ import {
     isPlayListEmpty,
     setPlayList,
     usePlayList
-} from "./internal/playList";
+} from "./internal/playList.ts";
 import { createMediaIndexMap } from "@/utils/mediaIndexMap";
-import PluginManager from "../pluginManager";
+import PluginManager from "../pluginManager.ts";
 import { musicIsPaused } from "@/utils/trackUtils";
 import { errorLog, trace } from "@/utils/log";
 import PersistStatus from "../persistStatus.ts";

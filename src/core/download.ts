@@ -11,10 +11,10 @@ import { InteractionManager } from "react-native";
 import { copyFile, downloadFile, exists, unlink } from '@dr.pogodin/react-native-fs';
 
 import Config from "./config.ts";
-import LocalMusicSheet from "./localMusicSheet";
-import MediaMeta from "./mediaExtra";
-import Network from "./network";
-import PluginManager from "./pluginManager";
+import LocalMusicSheet from "./localMusicSheet.ts";
+import MediaMeta from "./mediaExtra.ts";
+import Network from "./network.ts";
+import PluginManager from "./pluginManager.ts";
 import { check, PERMISSIONS } from "react-native-permissions";
 import path from "path-browserify";
 import { getCurrentDialog, hideDialog, showDialog } from "@/components/dialogs/useDialog";

@@ -3,15 +3,15 @@
  */
 
 import { isSameMediaItem } from "@/utils/mediaItem";
-import PluginManager from "./pluginManager";
+import PluginManager from "./pluginManager.ts";
 import LyricParser, { IParsedLrcItem } from "@/utils/lrcParser";
 import { GlobalState } from "@/utils/stateMapper";
 import { EDeviceEvents } from "@/constants/commonConst";
 import { DeviceEventEmitter } from "react-native";
 import Config from "./config.ts";
 import LyricUtil from "@/native/lyricUtil";
-import TrackPlayer from "./trackPlayer";
-import MediaExtra from "./mediaExtra";
+import TrackPlayer from "./trackPlayer/index.ts";
+import MediaExtra from "./mediaExtra.ts";
 import minDistance from "@/utils/minDistance";
 
 interface ILyricState {

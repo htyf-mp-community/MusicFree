@@ -1,16 +1,13 @@
-# Resolve react_native_pods.rb with node to allow for hoisting
+# Resolve expo autolinking and react_native_pods.rb with node to allow for hoisting
+require File.join(File.dirname(`node --print "require.resolve('expo/package.json')"`), "scripts/autolinking")
 require Pod::Executable.execute_command('node', ['-p',
   'require.resolve(
     "react-native/scripts/react_native_pods.rb",
     {paths: [process.argv[1]]},
   )', __dir__]).strip
-require Pod::Executable.execute_command('node', ['-p',
-  'require.resolve(
-    "expo/package.json",
-    {paths: [process.argv[1]]},
-  )', __dir__]).strip.gsub(/package\.json$/, 'scripts/autolinking')
 
-platform :ios, min_ios_version_supported
+# Expo 56 requires iOS 16.4+, which is higher than RN's min_ios_version_supported (15.1).
+platform :ios, '16.4'
 prepare_react_native_project!
 
 linkage = ENV['USE_FRAMEWORKS']
