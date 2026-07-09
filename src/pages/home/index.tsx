@@ -66,7 +66,7 @@ function Home() {
                 console.error(error);
             }
         }
-        // init();
+        init();
         if (plugins.length <= 0) {
           
             jssdk.showModal({
