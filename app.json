@@ -4,7 +4,7 @@
   "htyf": {
     "type": "app",
     "entry": "./src/index.tsx",
-    "version": "0.0.48",
+    "version": "0.0.49",
     "name": "MusicFree",
     "appid": "plugin_music",
     "rotate": "portrait",
