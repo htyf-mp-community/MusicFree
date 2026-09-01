@@ -8,14 +8,24 @@ import Share from 'react-native-share';
 import {B64Asset} from '@/constants/assetsConst';
 import IconButton from '@/components/base/iconButton';
 import TrackPlayer from '@/core/trackPlayer';
+import useCapsuleRightInset from '@/hooks/useCapsuleRightInset';
 
 export default function NavBar() {
     const navigation = useNavigation();
     const musicItem = TrackPlayer.useCurrentMusic();
+    const headerHeight = rpx(150);
+    const capsuleRightInset = useCapsuleRightInset();
     // const {showShare} = useShare();
 
     return (
-        <View style={styles.container}>
+        <View
+            style={[
+                styles.container,
+                {
+                    height: headerHeight,
+                    paddingRight: capsuleRightInset,
+                },
+            ]}>
             <IconButton
                 name="arrow-left"
                 sizeType={'normal'}
@@ -66,7 +76,6 @@ export default function NavBar() {
 const styles = StyleSheet.create({
     container: {
         width: '100%',
-        height: rpx(150),
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -76,7 +85,7 @@ const styles = StyleSheet.create({
     },
     headerContent: {
         flex: 1,
-        height: rpx(150),
+        height: '100%',
         justifyContent: 'center',
         alignItems: 'center',
     },

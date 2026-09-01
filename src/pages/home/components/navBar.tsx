@@ -8,13 +8,23 @@ import ThemeText from '@/components/base/themeText';
 import Color from 'color';
 import IconButton from '@/components/base/iconButton';
 import Icon from '@/components/base/icon.tsx';
+import useCapsuleRightInset from '@/hooks/useCapsuleRightInset';
 
 // todo icon: = musicFree(引入自定义字体 居中) search
 export default function NavBar() {
     const navigation = useNavigation<any>();
     const colors = useColors();
+    const headerHeight = rpx(88);
+    const capsuleRightInset = useCapsuleRightInset();
     return (
-        <View style={styles.appbar}>
+        <View
+            style={[
+                styles.appbar,
+                {
+                    height: headerHeight,
+                    paddingRight: capsuleRightInset,
+                },
+            ]}>
             <IconButton
                 accessibilityLabel="打开侧边栏"
                 name="bars-3"
@@ -61,8 +71,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         width: '100%',
-        height: rpx(88),
-        paddingRight: 102,
     },
     searchBar: {
         marginHorizontal: rpx(24),

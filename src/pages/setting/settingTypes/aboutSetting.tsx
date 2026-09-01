@@ -3,19 +3,16 @@ import {
     Image,
     ScrollView,
     StyleSheet,
-    TouchableOpacity,
     View,
 } from 'react-native';
 import rpx from '@/utils/rpx';
 import {ImgAsset} from '@/constants/assetsConst';
 import ThemeText from '@/components/base/themeText';
 import LinkText from '@/components/base/linkText';
-import useCheckUpdate from '@/hooks/useCheckUpdate.ts';
 import useOrientation from '@/hooks/useOrientation';
 import Divider from '@/components/base/divider';
 
 export default function AboutSetting() {
-    const checkAndShowResult = useCheckUpdate();
     const orientation = useOrientation();
 
     return (
@@ -33,16 +30,11 @@ export default function AboutSetting() {
                     style.header,
                     orientation === 'horizontal' ? style.horizontalSize : null,
                 ]}>
-                <TouchableOpacity
-                    onPress={() => {
-                        checkAndShowResult(true);
-                    }}>
-                    <Image
-                        source={ImgAsset.author}
-                        style={style.image}
-                        resizeMode="contain"
-                    />
-                </TouchableOpacity>
+                <Image
+                    source={ImgAsset.author}
+                    style={style.image}
+                    resizeMode="contain"
+                />
                 <ThemeText style={style.margin}>软件作者: 猫头猫</ThemeText>
                 <ThemeText style={style.margin}>
                     公众号: 【一只猫头猫】

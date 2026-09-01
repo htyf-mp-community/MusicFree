@@ -7,14 +7,12 @@ import { ROUTE_PATH, useNavigate } from '@/core/router';
 import ThemeText from '@/components/base/themeText';
 import PageBackground from '@/components/base/pageBackground';
 import DeviceInfo from 'react-native-device-info';
-import deviceInfoModule from 'react-native-device-info';
 import NativeUtils from '@/native/utils';
 import { useTimingClose } from '@/utils/timingClose';
 import timeformat from '@/utils/timeformat';
 import { showPanel } from '@/components/panels/usePanel';
 import Divider from '@/components/base/divider';
 import TrackPlayer from '@/core/trackPlayer';
-import { checkUpdateAndShowResult } from '@/hooks/useCheckUpdate.ts';
 import { IIconName } from '@/components/base/icon.tsx';
 
 const ITEM_HEIGHT = rpx(108);
@@ -142,23 +140,6 @@ function HomeDrawer(props: any) {
 
                     <ListItem
                         withHorizontalPadding
-                        key={'update'}
-                        onPress={() => {
-                            checkUpdateAndShowResult(true);
-                        }}>
-                        <ListItem.ListItemIcon
-                            icon={'arrow-path'}
-                            width={rpx(48)}
-                        />
-                        <ListItem.Content title="检查更新" />
-                        <ListItem.ListItemText
-                            position="right"
-                            fontSize="subTitle">
-                            {`当前版本: ${deviceInfoModule.getVersion()}`}
-                        </ListItem.ListItemText>
-                    </ListItem>
-                    <ListItem
-                        withHorizontalPadding
                         key={'about'}
                         onPress={() => {
                             navigateToSetting('about');
@@ -168,7 +149,7 @@ function HomeDrawer(props: any) {
                             width={rpx(48)}
                         />
                         <ListItem.Content
-                            title={`关于 ${deviceInfoModule.getApplicationName()}`}
+                            title={`关于 ${DeviceInfo.getApplicationName()}`}
                         />
                     </ListItem>
                 </View>

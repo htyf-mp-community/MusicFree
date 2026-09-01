@@ -1,55 +1,39 @@
 import {errorLog} from '@/utils/log';
-import ReactNativeBlobUtil from 'react-native-blob-util'
-import { MultiGetCallback } from '@react-native-async-storage/async-storage/lib/typescript/types';
-import { createMMKV } from 'react-native-mmkv';
-const AsyncStorage = createMMKV({
-    id: 'musicfree',
-    path: `${ReactNativeBlobUtil.fs.dirs.DocumentDir}/musicfree`,
-    encryptionKey: `musicfree`
-});
-export async function setStorage(key: string, value: any) {
+import getOrCreateMMKV from '@/utils/getOrCreateMMKV';
+
+/** 应用旧版键值数据使用的独立 MMKV 命名空间。 */
+const legacyStore = getOrCreateMMKV('Legacy');
+
+/** 保存可 JSON 序列化的数据；异步签名用于兼容原项目调用方。 */
+export async function setStorage(key: string, value: unknown): Promise<void> {
     try {
-        await AsyncStorage.set(key, JSON.stringify(value, null, ''));
-    } catch (e: any) {
-        errorLog(`存储失败${key}`, e?.message);
+        legacyStore.set(key, JSON.stringify(value));
+    } catch (error: unknown) {
+        const message = error instanceof Error ? error.message : String(error);
+        errorLog(`存储失败${key}`, message);
     }
 }
 
-export async function getStorage(key: string) {
+/** 读取并反序列化一个应用键；缺失或损坏时返回 null。 */
+export async function getStorage<T = any>(key: string): Promise<T | null> {
     try {
-        const result = await AsyncStorage.getString(key);
-        if (result) {
-            return JSON.parse(result);
-        }
-    } catch {}
-    return null;
+        const result = legacyStore.getString(key);
+        return result === undefined ? null : (JSON.parse(result) as T);
+    } catch (error: unknown) {
+        const message = error instanceof Error ? error.message : String(error);
+        errorLog(`读取存储失败${key}`, message);
+        return null;
+    }
 }
 
-export async function getMultiStorage(keys: string[]) {
-    if (keys.length === 0) {
-        return [];
-    }
-    const multiGet = (keys: readonly string[], callback?: MultiGetCallback) => {
-    const values = keys.map((key) => AsyncStorage.getString(key))
-    if (callback && typeof callback === 'function') {
-        callback(undefined, values as any);
-    }
-    return values;
-    }
-    const result = await multiGet(keys);
-
-    return result.map(_ => {
-        try {
-            if (_[1]) {
-                return JSON.parse(_[1]);
-            }
-            return null;
-        } catch {
-            return null;
-        }
-    });
+/** 按输入顺序批量读取；缺失或损坏的项目为 null。 */
+export async function getMultiStorage<T = any>(
+    keys: readonly string[],
+): Promise<Array<T | null>> {
+    return Promise.all(keys.map(key => getStorage<T>(key)));
 }
 
-export async function removeStorage(key: string) {
-    return AsyncStorage.remove(key);
+/** 删除一个应用键。 */
+export async function removeStorage(key: string): Promise<void> {
+    legacyStore.remove(key);
 }

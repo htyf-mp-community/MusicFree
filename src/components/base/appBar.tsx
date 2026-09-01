@@ -25,6 +25,7 @@ import Animated, {
 import Portal from './portal';
 import ListItem from './listItem';
 import { IIconName } from '@/components/base/icon.tsx';
+import useCapsuleRightInset from '@/hooks/useCapsuleRightInset';
 
 interface IAppBarProps {
     titleTextOpacity?: number;
@@ -48,7 +49,7 @@ interface IAppBarProps {
     onBackPress?: () => void;
 }
 
-const ANIMATION_EASING: Animated.EasingFunction = Easing.out(Easing.exp);
+const ANIMATION_EASING = Easing.out(Easing.exp);
 const ANIMATION_DURATION = 500;
 
 const timingConfig = {
@@ -73,6 +74,8 @@ export default function AppBar(props: IAppBarProps) {
 
     const colors = useColors();
     const navigation = useNavigation();
+    const headerHeight = rpx(88);
+    const capsuleRightInset = useCapsuleRightInset();
 
     const bgColor = color(colors.appBar ?? colors.primary).toString();
     const contentColor = _color ?? colors.appBarText;
@@ -88,7 +91,7 @@ export default function AppBar(props: IAppBarProps) {
         } else {
             scaleRate.value = withTiming(0, timingConfig);
         }
-    }, [showMenu]);
+    }, [scaleRate, showMenu]);
 
     const transformStyle = useAnimatedStyle(() => {
         return {
@@ -103,7 +106,11 @@ export default function AppBar(props: IAppBarProps) {
                 style={[
                     styles.container,
                     containerStyle,
-                    { backgroundColor: bgColor },
+                    {
+                        backgroundColor: bgColor,
+                        height: headerHeight,
+                        paddingRight: Math.max(rpx(24), capsuleRightInset),
+                    },
                 ]}>
                 <IconButton
                     name="arrow-left"
@@ -239,10 +246,9 @@ const styles = StyleSheet.create({
     container: {
         width: '100%',
         zIndex: 10000,
-        height: rpx(88),
         flexDirection: 'row',
         paddingLeft: rpx(24),
-        paddingRight: rpx(24) + 102,
+        paddingRight: rpx(24),
         alignItems: 'center'
     },
     content: {

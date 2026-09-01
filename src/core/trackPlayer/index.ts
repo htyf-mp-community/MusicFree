@@ -3,7 +3,6 @@ import ReactNativeTrackPlayer, {
     Event,
     State,
     Track,
-    TrackMetadataBase,
     usePlaybackState,
     useProgress
 } from "react-native-track-player";
@@ -849,6 +848,7 @@ const TrackPlayer = {
     clear,
     useCurrentMusic: currentMusicStore.useValue,
     getCurrentMusic: currentMusicStore.getValue,
+    isCurrentMusic,
     useRepeatMode: repeatModeStore.useValue,
     getRepeatMode: repeatModeStore.getValue,
     toggleRepeatMode,

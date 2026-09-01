@@ -42,7 +42,7 @@ export default function NavBar() {
     const hintTextColor = Color(colors.text).alpha(0.6).toString();
 
     return (
-        <AppBar containerStyle={style.appbar} contentStyle={style.appbar}>
+        <AppBar>
             <View style={style.searchBarContainer}>
                 <Icon
                     name="magnifying-glass"
@@ -101,9 +101,6 @@ export default function NavBar() {
 }
 
 const style = StyleSheet.create({
-    appbar: {
-        paddingRight: 0,
-    },
     button: {
         paddingHorizontal: rpx(24),
         height: '100%',

@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { LayoutRectangle, StyleSheet, Text, View } from "react-native";
+import { FlatList, LayoutRectangle, StyleSheet, Text, View } from "react-native";
 import rpx from "@/utils/rpx";
 import useDelayFalsy from "@/hooks/useDelayFalsy";
-import { FlatList, Gesture, GestureDetector, TapGestureHandler } from "react-native-gesture-handler";
+import { Gesture, GestureDetector, TapGestureHandler } from "react-native-gesture-handler";
 import { fontSizeConst } from "@/constants/uiConst";
 import Loading from "@/components/base/loading";
 import globalStyle from "@/constants/globalStyle";
@@ -58,10 +58,16 @@ export default function Lyric(props: IProps) {
     const [draggingIndex, setDraggingIndex, setDraggingIndexImmi] =
         useDelayFalsy<number | undefined>(undefined, 2000);
     const musicState = TrackPlayer.useMusicState();
+    // 页面直接读取播放器进度，避免依赖 HTYF playback service 与 UI 共享 JS 状态。
+    const playbackProgress = TrackPlayer.useProgress(250);
+
+    useEffect(() => {
+        LyricManager.updateCurrentLyricForPosition(playbackProgress.position);
+    }, [playbackProgress.position]);
 
     const [layout, setLayout] = useState<LayoutRectangle>();
 
-    const listRef = useRef<FlatList<IParsedLrcItem> | null>();
+    const listRef = useRef<FlatList<IParsedLrcItem> | null>(null);
 
     const currentMusicItem = TrackPlayer.useCurrentMusic();
     const associateMusicItem = currentMusicItem
@@ -101,16 +107,16 @@ export default function Lyric(props: IProps) {
         if (!listRef.current) {
             return;
         }
-        const currentLrcItem = LyricManager.getCurrentLyric();
-        const lyrics = LyricManager.getLyricState().lyrics;
-        if (currentLrcItem?.index === -1 || !currentLrcItem) {
+        const activeLyric = LyricManager.getCurrentLyric();
+        const activeLyrics = LyricManager.getLyricState().lyrics;
+        if (activeLyric?.index === -1 || !activeLyric) {
             listRef.current?.scrollToIndex({
                 index: 0,
                 viewPosition: 0.5,
             });
         } else {
             listRef.current?.scrollToIndex({
-                index: Math.min(currentLrcItem.index ?? 0, lyrics.length - 1),
+                index: Math.min(activeLyric.index ?? 0, activeLyrics.length - 1),
                 viewPosition: 0.5,
             });
         }
@@ -129,7 +135,7 @@ export default function Lyric(props: IProps) {
                 }
             }, 200) as any;
         };
-    }, []);
+    }, [scrollToCurrentLrcItem]);
 
     useEffect(() => {
         // 暂停且拖拽才返回
@@ -152,15 +158,14 @@ export default function Lyric(props: IProps) {
                 viewPosition: 0.5,
             });
         }
-        // 音乐暂停状态不应该影响到滑动，所以不放在依赖里，但是这样写不好。。
-    }, [currentLrcItem, lyrics, draggingIndex]);
+    }, [currentLrcItem, draggingIndex, lyrics, musicState]);
 
     useEffect(() => {
         scrollToCurrentLrcItem();
         return () => {
             isMountedRef.current = false;
         };
-    }, []);
+    }, [scrollToCurrentLrcItem]);
 
     // 开始滚动时拖拽生效
     const onScrollBeginDrag = () => {

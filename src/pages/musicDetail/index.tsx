@@ -30,7 +30,9 @@ export default function MusicDetail() {
     return (
         <>
             <Background />
-            <SafeAreaView style={globalStyle.fwflex1}>
+            <SafeAreaView
+                edges={['top', 'left', 'right', 'bottom']}
+                style={globalStyle.fwflex1}>
                 <StatusBar backgroundColor={'transparent'} />
                 <View style={style.bodyWrapper}>
                     <View style={globalStyle.flex1}>

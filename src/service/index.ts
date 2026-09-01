@@ -65,26 +65,8 @@ module.exports = async function () {
     RNTrackPlayer.addEventListener(Event.PlaybackProgressUpdated, evt => {
         PersistStatus.set('music.progress', evt.position);
 
-        // 歌词逻辑
-        const parser = LyricManager.getLyricState().lyricParser;
-        if (parser) {
-            const prevLyricText = LyricManager.getCurrentLyric()?.lrc;
-            const currentLyricItem = parser.getPosition(evt.position);
-            if (prevLyricText !== currentLyricItem?.lrc) {
-                LyricManager.setCurrentLyric(currentLyricItem ?? null);
-                const showTranslation = PersistStatus.get(
-                    'lyric.showTranslation',
-                );
-                if (Config.getConfig('lyric.showStatusBarLyric')) {
-                    LyricUtil.setStatusBarLyricText(
-                        (currentLyricItem?.lrc ?? '') +
-                            (showTranslation
-                                ? `\n${currentLyricItem?.translation ?? ''}`
-                                : ''),
-                    );
-                }
-            }
-        }
+        // 后台播放上下文也同步歌词；具体索引判定与前台共用同一实现。
+        LyricManager.updateCurrentLyricForPosition(evt.position);
     });
 
     RNTrackPlayer.addEventListener(Event.RemoteStop, async () => {
