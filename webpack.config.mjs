@@ -31,7 +31,9 @@ const appid = process.env.APP_ID;
 // 构建Module Federation共享依赖对象
 const sharedObj = {};
 for (const key in dependencies) {
-  const version = dependencies[key];
+  const version = Object.hasOwn(pkg.dependencies, key)
+    ? fse.readJsonSync(path.join(__dirname, 'node_modules', key, 'package.json')).version
+    : dependencies[key];
   sharedObj[key] = {
     /** 是否运行为单例 */
     singleton: true,
@@ -53,7 +55,7 @@ export default (env = {}) => {
   const { entry = './index.js', platform = 'ios' } = env;
   const context = env.context || __dirname;
   // 获取Repack的resolve配置
-  const _options = Repack.getResolveOptions();
+  const _options = Repack.getResolveOptions(platform);
 
   // 解析微前端相关配置
   let mpOptions = {};
