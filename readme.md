@@ -1,10 +1,57 @@
-## [红糖云服app下载 https://mp.dagouzhi.com/ ](https://mp.dagouzhi.com/)
+# MusicFree HTYF
 
-### 使用红糖云服app 扫码添加小程序
+MusicFree 的红糖云服应用版本，保留插件搜索、播放、歌词和歌单功能。
+MusicFree for the HTYF host, with plugin search, playback, lyrics and playlists.
 
-[![小程序码](./qrcode.png)](https://share.dagouzhi.com/#/pages/index/index?data=%7B%22type%22%3A%22app%22%2C%22name%22%3A%22MusicFree%22%2C%22projectname%22%3A%22MusicFree%22%2C%22appid%22%3A%22MusicFree_996%22%2C%22appUrlConfig%22%3A%22https%3A%2F%2Fraw.gitmirror.com%2Fhtyf-mp-community%2FMusicFree%2Fmaster%2Fdgz%2Fbuild%2Foutputs%2Fapp.json%22%2C%22zipUrl%22%3A%22https%3A%2F%2Fraw.gitmirror.com%2Fhtyf-mp-community%2FMusicFree%2Fmaster%2Fdgz%2Fbuild%2Foutputs%2Fdist.dgz%22%7D)
+## 预览、分享与使用 / Preview, Share and Use
 
->更多小程序demo 请查看[https://github.com/htyf-mp-community/demo](https://github.com/htyf-mp-community/demo)
+[打开分享页 / Open the share page](https://mp.dagouzhi.com/share?data=%7B%22type%22%3A%22app%22%2C%22version%22%3A%220.0.64%22%2C%22name%22%3A%22MusicFree%22%2C%22appid%22%3A%22plugin_music%22%2C%22rotate%22%3A%22portrait%22%2C%22appUrlConfig%22%3A%22https%3A%2F%2Fraw.githubusercontent.com%2Fhtyf-mp-community%2Fdemo%2Fmain%2Fv2%2Fplugin_music%2Flatest%2Fapp.json%22%2C%22zipUrl%22%3A%22https%3A%2F%2Fraw.githubusercontent.com%2Fhtyf-mp-community%2Fdemo%2Fmain%2Fv2%2Fplugin_music%2Flatest%2Fdist.dgz%22%2C%22projectname%22%3A%22MusicFree%22%2C%22engines%22%3A%222.0.0%22%7D) · 应用 ID / App ID: `plugin_music` · 版本 / Version: `0.0.64`
+
+![MusicFree 分享二维码 / MusicFree share QR code](docs/assets/htyf-share-qr.png)
+
+此入口需要红糖云服 App。线上配置与资源地址可访问，当前为旧构建；此次模板更新后的资源包尚未上传，扫码添加和打开的真机验证待完成。
+This entry requires the HTYF App. The online config and package are reachable and serve the previous build. The package from this template update has not been uploaded; device scan, add and open checks are pending.
+
+1. 访问[红糖云服官网](https://mp.dagouzhi.com)，从下载入口安装并打开 App。
+   Visit the [HTYF website](https://mp.dagouzhi.com), then download, install and open the App.
+2. 打开 App 的扫码入口，按提示允许相机权限，扫描上方二维码，等待应用添加并加载。
+   Open the scanner, allow camera access when prompted, scan the QR code above and wait for the app to be added and loaded.
+3. 在侧边栏「设置 → 插件设置」安装自己的插件，再搜索歌曲、播放并查看歌词和歌单。
+   Install your plugin under the sidebar's Settings → Plugin Settings, then search, play and try lyrics and playlists.
+4. 将分享链接或二维码图片发给他人，按相同步骤添加。
+   Send the share link or QR image to another person so they can follow the same steps.
+
+发布前，需将 `dist/app.json` 上传到 [appUrlConfig](https://raw.githubusercontent.com/htyf-mp-community/demo/main/v2/plugin_music/latest/app.json)，将 `dist/dist.dgz` 上传到 [zipUrl](https://raw.githubusercontent.com/htyf-mp-community/demo/main/v2/plugin_music/latest/dist.dgz)。打包不会自动上传文件。
+Before release, upload `dist/app.json` to [appUrlConfig](https://raw.githubusercontent.com/htyf-mp-community/demo/main/v2/plugin_music/latest/app.json) and `dist/dist.dgz` to [zipUrl](https://raw.githubusercontent.com/htyf-mp-community/demo/main/v2/plugin_music/latest/dist.dgz). Packaging does not upload these files.
+
+## 开发与模板版本 / Development and Template Version
+
+模板来自 [htyf-cli@8c6fc84](https://github.com/htyf-mp-community/htyf-cli/commit/8c6fc84077470bee05af97d6cf04682a0977c210) 的 `packages/cli/_apps_temp_`。需要 Node.js ≥22.13.0，以及与 React Native 0.88.1 配套的红糖云服宿主。
+The template comes from `packages/cli/_apps_temp_` at [htyf-cli@8c6fc84](https://github.com/htyf-mp-community/htyf-cli/commit/8c6fc84077470bee05af97d6cf04682a0977c210). Use Node.js ≥22.13.0 and an HTYF host compatible with React Native 0.88.1.
+
+在本目录执行 / Run from this directory:
+
+```sh
+yarn install --frozen-lockfile
+yarn test --runInBand
+yarn lint
+yarn tsc --noEmit
+yarn htyf build --non-interactive --platform ios
+# 同一局域网内，手机通过 CLI 提示连接；调试服务需保持运行。
+# Connect the phone as instructed by the CLI on the same LAN; keep the service running.
+yarn htyf debug --non-interactive --platform ios
+```
+
+每次发布后，使用构建配置重新生成文档二维码 / Regenerate the documentation QR from the built config after each release:
+
+```sh
+node -e 'const fs=require("node:fs"); const app=JSON.parse(fs.readFileSync("dist/app.json","utf8")); delete app.entry; require("qrcode").toFile("docs/assets/htyf-share-qr.png", "https://mp.dagouzhi.com/share?data="+encodeURIComponent(JSON.stringify(app)), {scale:6,margin:4})'
+```
+
+同步更新开头的分享链接，确保其数据与二维码一致。详细变更与验证记录见 [.htyf-migration/template-update.md](.htyf-migration/template-update.md)。
+Refresh the opening share link so its data matches the QR code. See [.htyf-migration/template-update.md](.htyf-migration/template-update.md) for changes and validation.
+
+---
 
 # MusicFree
 

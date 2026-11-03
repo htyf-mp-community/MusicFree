@@ -1,0 +1,458 @@
+{
+  "schemaVersion": 1,
+  "updatedOn": "2026-11-03",
+  "scope": "official React Native application template update",
+  "upstream": {
+    "repository": "https://github.com/htyf-mp-community/htyf-cli.git",
+    "branch": "main",
+    "commit": "8c6fc84077470bee05af97d6cf04682a0977c210",
+    "templatePath": "packages/cli/_apps_temp_",
+    "remoteHeadVerified": true
+  },
+  "runtime": {
+    "react": "19.3.1",
+    "react-native": "0.88.1",
+    "expo": "58.0.22",
+    "@htyf-mp/cli": "0.7.14",
+    "@htyf-mp/js-sdk": "0.2.28"
+  },
+  "templateManifest": {
+    ".bundle/config": "1bb9cb652452ff64fc047171561f9d7310319496a03d667703b953a716b3e589",
+    ".eslintrc.js": "6b5a39f38bf0097d86394ed81cdc52560fee480a1fe1b237bb14cf199c564a97",
+    ".gitignore": "213a27384c1e3f32af7ee4ee619ef2528e775527818f29976ee9b89411b31ebf",
+    ".prettierrc.js": "ed7c5f7f2f0f21950c2acbb7425d212bbcf0d7ecd3bdd440af42c67cbb8d6851",
+    ".watchmanconfig": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+    "Gemfile": "e9d3eed48f9445a25962c1f5890993f7e9dd10169ce4e6f12e4852238e08899a",
+    "README.md": "94bce35cec678953cf65759ddec2b2023b6a5e26a4b8bda852952fc616d6ceb0",
+    "__tests__/App.test.tsx": "5e79b515bee1084a619e349b6b2876dd7481a597e26ea462975a1ba64ff546de",
+    "android/app/build.gradle": "44a271da51581a1f8d6d65e064b3b1e400e17b71ec92f32aef8a0d051a57e5e7",
+    "android/app/debug.keystore": "221e0a3106aa4c3ccc154e0a418b55020b3f9ea6e84f92e8749cd9e2f39f5e58",
+    "android/app/proguard-rules.pro": "426b908d7c5dac3db6648e2b21e3762ad9639e4976f7a2eb4e72d60d51b08ef2",
+    "android/app/src/main/AndroidManifest.xml": "e3517aa998a5cbe6c10b54b6a9762e2ee5b381e3a04323ad7ccefba5a476dcb8",
+    "android/app/src/main/java/com/apps/MainActivity.kt": "d5682e968096b01be83dbafa99a415100c275976bcee464131f3ec9dc6915817",
+    "android/app/src/main/java/com/apps/MainApplication.kt": "dd440226fe74fc75778c31c3cab2f6564e2016b53e04b7d885750d8607e3592a",
+    "android/app/src/main/res/drawable/rn_edit_text_material.xml": "738e3aaad53180caba1419a6d5db8465a0742662fe59a4bbaf05f1061cbc3390",
+    "android/app/src/main/res/mipmap-hdpi/ic_launcher.png": "ded7aabf6a56b694e486e096efd89e2f0c9067d292b634663898e352c9491f10",
+    "android/app/src/main/res/mipmap-hdpi/ic_launcher_round.png": "21304a0c9b00da6a72cfa31c7229c9528fc17b6e5eb4e68a969bce08c01a2fee",
+    "android/app/src/main/res/mipmap-mdpi/ic_launcher.png": "eef20f25fb1477d8c9df15757e764811cc503fb0777f18d0f7fb2d19178b5bf6",
+    "android/app/src/main/res/mipmap-mdpi/ic_launcher_round.png": "520d05f978a15ba0ccf23006a1a5691a054a02478c70cafc5ebafae76e600f0d",
+    "android/app/src/main/res/mipmap-xhdpi/ic_launcher.png": "e77c5045bfdb6f4bbe955b3a793bfed3baa369ce4811ae2a9103d5480637cfff",
+    "android/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png": "2846e1a703e519791fe22f41bcb243b82f908d12e5ebcb43f020ddf9982780b0",
+    "android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png": "eb3a34b13632e0cb3b1c0f4273035866cbe81b1b17b7178ce29d19c78d394a5e",
+    "android/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png": "363a569beb72e8b007bf046454612148d4c9f782b9391352059fe83179f18e30",
+    "android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png": "9ff27328b6916b7f75b99ef36153f154bb4724946e5654635cba2e257352c69f",
+    "android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png": "5bacd97a1b41e4413c6092cdbd83f65112a9124e823cfaa3a219c65e2761647b",
+    "android/app/src/main/res/values/strings.xml": "7969181726ddba9b8bb33ccf4293a8b208bea731792aa389f63e1aff9ca05dce",
+    "android/app/src/main/res/values/styles.xml": "0f421dd24b8de63f7b73b98be3d51d841d024f5452ac1f70e4c2b33a62b64f68",
+    "android/build.gradle": "3a254a661d7ed817e68fd8670f890ba2d8348efe51e407e19d6e5cd960718fba",
+    "android/gradle.properties": "3929f4440d293d286ea7a3e92d2b1a5d318bd99641aadc90a6365260ac0fe34d",
+    "android/gradle/wrapper/gradle-wrapper.jar": "b3a875ddc1f044746e1b1a55f645584505f4a10438c1afea9f15e92a7c42ec13",
+    "android/gradle/wrapper/gradle-wrapper.properties": "a180163249c7252412ddaee1c7adcf59f6494b1183136f690fbd9a3b8aaed00e",
+    "android/gradlew": "fb68debc1b1acf8ec55dc0d5e5495e1dedd0bd6b61f304bee61613eeb2bd9b92",
+    "android/gradlew.bat": "982f1b2979dd2d13505c11e92192ab43eef338242ca61587f86f8d7fbc86f67b",
+    "android/settings.gradle": "98e14e5788fc95241b5be2701690c650d5d006192fb53f8ad7fee0c64388af7b",
+    "app.json": "31ef6f9bf7bfc86820b372921e473b00401b654009bf18504f316d9356f1bf26",
+    "babel.config.js": "131cc0d4a409bbbf31a8cf9ca36f354e453af67a71d1ab13506cda5db4dc23a6",
+    "index.js": "d27802fdabc6bbfbe691705718ba2e0d76a92bc63f90745e5f9097b02d5e1a75",
+    "ios/.xcode.env": "3c02dca07775b31ce4e77dfb3bb660d7c6e577474d65a6216f1ea9bef54e1ca6",
+    "ios/Podfile": "471f0d9868ddace8e778136faa15bd0b71860324b13fc98b0abf49bdb49cb15d",
+    "ios/Podfile.lock": "1edf3a2e070c4609a42f3ee012b936ff46b898a7b4243c9ed847f4e669ad15b1",
+    "ios/apps.xcodeproj/project.pbxproj": "99b69bcd56439df8ba7ef5620993bdcfb75ec8385fe64ad31d0b962e75a08785",
+    "ios/apps.xcodeproj/xcshareddata/xcschemes/apps.xcscheme": "3968c84fe6c6ca9f4ee4f5f4619905a70ed88491ed58ed951c6ca690aecac34c",
+    "ios/apps.xcworkspace/contents.xcworkspacedata": "f775ee12a86957c433730f76d1043adee63209b68934ec8fa78034fb16b33b0f",
+    "ios/apps/AppDelegate.swift": "5ce40e9ccd41d9370ca8960c53282fc2eb89e418f38c71700b96aaf8cbf64fb7",
+    "ios/apps/Images.xcassets/AppIcon.appiconset/Contents.json": "8a18bd4a58344d5fd5ac8f51f2e1a4e3409b0c3e503ea4d0940399900aa9ffd8",
+    "ios/apps/Images.xcassets/Contents.json": "991ae939fbd598450a066b66404e06c5ae9b7d37e9aa0026de9e318443ba46fb",
+    "ios/apps/Info.plist": "180b63d8e7ffef194908c6106978019acfed97a213eea4fe82d207c554de7e38",
+    "ios/apps/LaunchScreen.storyboard": "5bfa1d86a79376791f061478f54ddd65cfb0e2112e2c4283abe9d105a792230a",
+    "ios/apps/PrivacyInfo.xcprivacy": "6614e3ddf91d19c79dc5dd5e474421a15b5b7abeff5ce2bab98691855e560aa9",
+    "jest.config.js": "ff34c1c382123874acdb6a54d01ba979ce59363a398abef6e4c471857cfadadc",
+    "metro.config.js": "aaf6a75e73476ef1513fee03ff44c91c30da0c5296e21f7e58484cdbb54e93fc",
+    "package.json": "4a946f6aaf2779b349b602561aecb694072ee4e2fa83d5ab7aa026ffe1c249ba",
+    "react-native.config.js": "6c9e71fdddd6410db5d7dea466f6fa5451e1feaa1b1bd8c7acbd13068dd7c2dd",
+    "src/index.tsx": "a4feae1adf7ab025e9231183e8b850d742e4cb1ae1fb8be2f7a84b5c94ac5a9d",
+    "tsconfig.json": "57fa1f10b00dcd03dae0dbcdd9ed48b181ce524f39d95da0263ed8e81d6a8dd4",
+    "webpack.config.mjs": "7dd3e287e3ac5be40b2a815e4f56bd6fd5d3d9e1d93eca68d4869a8ec1888571"
+  },
+  "dependencyChanges": [
+    {
+      "section": "dependencies",
+      "package": "@callstack/repack",
+      "from": "5.4.0",
+      "to": "5.4.2"
+    },
+    {
+      "section": "dependencies",
+      "package": "@d11/react-native-fast-image",
+      "from": "8.13.0",
+      "to": null
+    },
+    {
+      "section": "dependencies",
+      "package": "@dr.pogodin/react-native-fs",
+      "from": "2.40.3",
+      "to": "2.41.0"
+    },
+    {
+      "section": "dependencies",
+      "package": "@htyf-mp/cli",
+      "from": "0.6.0",
+      "to": "0.7.14"
+    },
+    {
+      "section": "dependencies",
+      "package": "@htyf-mp/js-sdk",
+      "from": "0.2.25",
+      "to": "0.2.28"
+    },
+    {
+      "section": "dependencies",
+      "package": "@react-native-community/slider",
+      "from": "5.2.1",
+      "to": "5.2.2"
+    },
+    {
+      "section": "dependencies",
+      "package": "@react-navigation/native",
+      "from": "7.2.2",
+      "to": "7.5.1"
+    },
+    {
+      "section": "dependencies",
+      "package": "@react-navigation/stack",
+      "from": "7.8.10",
+      "to": "7.12.1"
+    },
+    {
+      "section": "dependencies",
+      "package": "expo",
+      "from": "57.0.26",
+      "to": "58.0.22"
+    },
+    {
+      "section": "dependencies",
+      "package": "expo-document-picker",
+      "from": "57.0.3",
+      "to": "58.0.4"
+    },
+    {
+      "section": "dependencies",
+      "package": "expo-file-system",
+      "from": "57.0.7",
+      "to": "58.0.13"
+    },
+    {
+      "section": "dependencies",
+      "package": "expo-keep-awake",
+      "from": "57.0.2",
+      "to": "58.0.3"
+    },
+    {
+      "section": "dependencies",
+      "package": "expo-modules-autolinking",
+      "from": "^57.0.5",
+      "to": "58.0.16"
+    },
+    {
+      "section": "dependencies",
+      "package": "expo-modules-core",
+      "from": "57.0.20",
+      "to": "58.0.29"
+    },
+    {
+      "section": "dependencies",
+      "package": "react",
+      "from": "19.2.3",
+      "to": "19.3.1"
+    },
+    {
+      "section": "dependencies",
+      "package": "react-native",
+      "from": "0.86.3",
+      "to": "0.88.1"
+    },
+    {
+      "section": "dependencies",
+      "package": "react-native-fast-image",
+      "from": null,
+      "to": "10.10.2"
+    },
+    {
+      "section": "dependencies",
+      "package": "react-native-gesture-handler",
+      "from": "3.3.0",
+      "to": "3.4.0"
+    },
+    {
+      "section": "dependencies",
+      "package": "react-native-get-random-values",
+      "from": "2.0.0",
+      "to": "2.1.0"
+    },
+    {
+      "section": "dependencies",
+      "package": "react-native-image-colors",
+      "from": "2.6.0",
+      "to": "2.6.1"
+    },
+    {
+      "section": "dependencies",
+      "package": "react-native-image-picker",
+      "from": "8.2.1",
+      "to": "8.3.0"
+    },
+    {
+      "section": "dependencies",
+      "package": "react-native-pager-view",
+      "from": "9.0.6",
+      "to": "9.0.11"
+    },
+    {
+      "section": "dependencies",
+      "package": "react-native-permissions",
+      "from": "5.6.2",
+      "to": "5.6.3"
+    },
+    {
+      "section": "dependencies",
+      "package": "react-native-safe-area-context",
+      "from": "5.10.1",
+      "to": "5.11.0"
+    },
+    {
+      "section": "dependencies",
+      "package": "react-native-screens",
+      "from": "4.28.0",
+      "to": "4.30.1"
+    },
+    {
+      "section": "dependencies",
+      "package": "react-native-svg",
+      "from": "15.15.5",
+      "to": "15.16.0"
+    },
+    {
+      "section": "dependencies",
+      "package": "react-native-worklets",
+      "from": "0.13.0",
+      "to": "0.13.1"
+    },
+    {
+      "section": "devDependencies",
+      "package": "@callstack/repack-plugin-expo-modules",
+      "from": "5.2.5",
+      "to": "5.4.2"
+    },
+    {
+      "section": "devDependencies",
+      "package": "@callstack/repack-plugin-reanimated",
+      "from": "5.2.5",
+      "to": "5.4.2"
+    },
+    {
+      "section": "devDependencies",
+      "package": "@eslint/compat",
+      "from": null,
+      "to": "2.1.1"
+    },
+    {
+      "section": "devDependencies",
+      "package": "@module-federation/enhanced",
+      "from": "0.8.9",
+      "to": "0.19.1"
+    },
+    {
+      "section": "devDependencies",
+      "package": "@react-native-community/cli",
+      "from": "20.1.3",
+      "to": "20.2.0"
+    },
+    {
+      "section": "devDependencies",
+      "package": "@react-native-community/cli-platform-android",
+      "from": "20.1.3",
+      "to": "20.2.0"
+    },
+    {
+      "section": "devDependencies",
+      "package": "@react-native-community/cli-platform-ios",
+      "from": "20.1.3",
+      "to": "20.2.0"
+    },
+    {
+      "section": "devDependencies",
+      "package": "@react-native/babel-preset",
+      "from": "0.86.3",
+      "to": "0.88.1"
+    },
+    {
+      "section": "devDependencies",
+      "package": "@react-native/eslint-config",
+      "from": "0.86.3",
+      "to": "0.88.1"
+    },
+    {
+      "section": "devDependencies",
+      "package": "@react-native/jest-preset",
+      "from": "0.86.3",
+      "to": "0.88.1"
+    },
+    {
+      "section": "devDependencies",
+      "package": "@react-native/metro-config",
+      "from": "0.86.3",
+      "to": "0.88.1"
+    },
+    {
+      "section": "devDependencies",
+      "package": "@react-native/typescript-config",
+      "from": "0.86.3",
+      "to": "0.88.1"
+    },
+    {
+      "section": "devDependencies",
+      "package": "@types/jest",
+      "from": "29.5.14",
+      "to": "30.0.0"
+    },
+    {
+      "section": "devDependencies",
+      "package": "@types/react",
+      "from": "19.2.15",
+      "to": "19.3.0"
+    },
+    {
+      "section": "devDependencies",
+      "package": "@types/react-test-renderer",
+      "from": "19.1.0",
+      "to": "19.3.0"
+    },
+    {
+      "section": "devDependencies",
+      "package": "@typescript-eslint/parser",
+      "from": null,
+      "to": "8.72.1"
+    },
+    {
+      "section": "devDependencies",
+      "package": "cross-env",
+      "from": null,
+      "to": "10.1.0"
+    },
+    {
+      "section": "devDependencies",
+      "package": "eslint",
+      "from": "8.57.1",
+      "to": "10.9.1"
+    },
+    {
+      "section": "devDependencies",
+      "package": "jest",
+      "from": "29.7.0",
+      "to": "30.5.1"
+    },
+    {
+      "section": "devDependencies",
+      "package": "prettier",
+      "from": "3.8.3",
+      "to": "3.9.10"
+    },
+    {
+      "section": "devDependencies",
+      "package": "react-test-renderer",
+      "from": "19.2.3",
+      "to": "19.3.1"
+    }
+  ],
+  "preserved": [
+    "app.json",
+    "index.js",
+    "__tests__/",
+    "patches/",
+    "ios/",
+    "android/",
+    "business behavior and app-owned MMKV namespace"
+  ],
+  "adaptations": [
+    "Synchronize existing dependencies; do not add unused demo/native packages or AsyncStorage.",
+    "Retain and update @react-native/jest-preset for RN 0.88; the upstream template uses a legacy react-native preset.",
+    "Use RN flat config with official @eslint/compat; use the TypeScript parser for local JS because the RN Babel parser lacks ESLint 10 scope APIs.",
+    "Align expo-modules-autolinking with SDK 58 (58.0.16).",
+    "Pin cross-env for the CLI subprocess instead of relying on an interactive npx download.",
+    "Use Re.Pack 5.4.2 to satisfy both plugin peer requirements; retain the host shared runtime version from the CLI manifest.",
+    "Enable RN package exports and preserve Cheerio browser entry resolution instead of pulling Node HTTP modules into the app.",
+    "Set a failing process exit code on compiler errors, which Re.Pack otherwise logs without failing the CLI.",
+    "Replace unsupported @d11/react-native-fast-image with the host-provided react-native-fast-image 10.10.2; update only the three import specifiers."
+  ],
+  "migrationBaselineAdvanced": false,
+  "notes": [
+    "This records template provenance only; the feature migration checklist remains open.",
+    "Standalone iOS/Android projects were preserved and need separate native upgrade verification.",
+    "Host device acceptance and publishing the rebuilt package remain pending."
+  ],
+  "localBuildToolOverrides": {
+    "@callstack/repack": {
+      "templateVersion": "5.4.0",
+      "localVersion": "5.4.2",
+      "hostSharedVersion": "5.4.0",
+      "reason": "Both template Re.Pack plugins require @callstack/repack ^5.4.2."
+    }
+  },
+  "additionalTooling": {
+    "@eslint/compat": "2.1.1",
+    "@typescript-eslint/parser": "8.72.1",
+    "cross-env": "10.1.0"
+  },
+  "businessImportChanges": [
+    "src/components/base/fastImage.tsx",
+    "src/components/base/listItem.tsx",
+    "src/utils/fileUtils.ts"
+  ],
+  "sharedManifestSha256": "fb525affc139458a7ff624e5319a957e611636a0f737d6df5651a6d6b2eb662c",
+  "verification": {
+    "dependencyIntegrity": "pass",
+    "postinstallPatch": "pass",
+    "unitTests": {
+      "status": "pass",
+      "suites": 3,
+      "tests": 17
+    },
+    "changedConfigurationLint": "pass",
+    "fullLint": {
+      "status": "failed",
+      "errors": 84,
+      "warnings": 3727,
+      "scope": "business source diagnostics remain"
+    },
+    "typecheck": {
+      "status": "failed",
+      "diagnostics": 138,
+      "scope": "business source diagnostics remain"
+    },
+    "invalidBuildExitCodeGuard": "pass",
+    "ios": {
+      "status": "pass",
+      "artifact": "build/verification/ios/dist.dgz",
+      "packageBytes": 1709236,
+      "bundleBytes": 8348459,
+      "sha256": "d7d8e03bda0e23a6f2593eb63ab1c45bd2defa79a0f91106efa1a417602533d0",
+      "warnings": 1,
+      "warning": "Reanimated jestUtils dynamic require"
+    },
+    "android": {
+      "status": "pass",
+      "artifact": "build/verification/android/dist.dgz",
+      "packageBytes": 1710025,
+      "bundleBytes": 8354205,
+      "sha256": "4e958777b00843a57141f340a1f2a2e9e6bee474f7914bcb33e21cbe50b8e411",
+      "warnings": 1,
+      "warning": "Reanimated jestUtils dynamic require"
+    },
+    "shareQrPayload": "decoded and matches README share URL; public data matches final build config",
+    "remoteConfigHttpStatus": 200,
+    "remotePackageHttpStatus": 200,
+    "sourcePreservation": "pass",
+    "deviceHostAcceptance": "pending",
+    "publication": "not performed"
+  }
+}

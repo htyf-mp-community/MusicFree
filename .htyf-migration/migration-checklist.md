@@ -35,8 +35,10 @@ until all items below pass validation.
 - [ ] Audit every dialog, panel, menu and toast for in-tree overlay ownership and back dismissal.
 - [ ] Review exported API documentation and replace vague TODO comments.
 - [ ] Run typecheck, lint, unit tests and device-level acceptance checks.
-  Unit tests currently pass (10/10), and changed files pass ESLint. Full TypeScript
-  validation still reports 118 errors, so this item remains open.
+  After the template update, unit tests pass (17/17) and the changed build/lint
+  configuration passes ESLint. Full TypeScript validation reports 138 errors,
+  and full ESLint reports 84 errors, so this item remains open. See
+  [template-update.md](template-update.md) for build evidence and remaining checks.
 
 ## File reconciliation
 
@@ -45,3 +47,12 @@ source-relative paths have no same-path target file. Several have apparent renam
 replacements (for example `core/appConfig.ts` to `core/config.ts`), but each mapping
 still needs behavioral review. Missing same-path areas include i18n, error boundary,
 schedule-close dialog, downloader, plugin-manager modules and bootstrap modules.
+
+## Official template update: 2026-11-03
+
+Updated the existing application target against official `htyf-cli` main commit
+`8c6fc84077470bee05af97d6cf04682a0977c210`, verified against GitHub HEAD.
+See [template-update.md](template-update.md) for the version changes, preserved
+application files, verification results and remaining host/native checks.
+This template update does not complete the feature inventory or advance its
+source migration baseline.

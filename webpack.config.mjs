@@ -1,6 +1,7 @@
 // 导入Node.js和第三方依赖
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { createRequire } from 'node:module';
 import fse from 'fs-extra';
 import webpack from 'webpack';
 import TerserPlugin from 'terser-webpack-plugin';
@@ -13,14 +14,34 @@ import { HtyfModulesPlugin } from '@htyf-mp/cli/src/HtyfImportsPlugin.mjs';
 // 获取当前文件和目录路径
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const require = createRequire(import.meta.url);
+const cheerioPackagePath = require.resolve('cheerio/package.json');
+const cheerioBrowserEntry = path.resolve(
+  path.dirname(cheerioPackagePath),
+  require(cheerioPackagePath).browser,
+);
+
+/** 让编译错误传给 CLI，防止 Re.Pack 只打印错误后继续生成无效资源包。 */
+class HtyfBuildValidationPlugin {
+  apply(compiler) {
+    // Re.Pack 可能吞掉异常并只打印日志，显式设置退出码才能阻止 CLI 压缩失败输出。
+    compiler.hooks.failed.tap('HtyfBuildValidationPlugin', () => {
+      process.exitCode = 1;
+    });
+    compiler.hooks.done.tap('HtyfBuildValidationPlugin', stats => {
+      if (stats.hasErrors()) {
+        process.exitCode = 1;
+        throw new Error('HTYF 编译失败，已停止打包。请先修复编译错误。');
+      }
+    });
+  }
+}
 
 // 微前端暴露配置，通常为JSON字符串
 const appExposesOptions = process.env.APP_EXPOSES_OPTIONS;
 
-// 读取package.json，获取应用基本信息
-const pkg = fse.readJsonSync(path.join(__dirname, './package.json'));
 // 读取依赖共享配置
-const dependencies = fse.readJsonSync(path.join(__dirname, 'node_modules/@htyf-mp/cli/src/shared-output.json'));
+const dependencies = fse.readJsonSync(require.resolve('@htyf-mp/cli/src/shared-output.json'));
 
 // 记录构建时间戳
 const time = Date.now();
@@ -31,16 +52,14 @@ const appid = process.env.APP_ID;
 // 构建Module Federation共享依赖对象
 const sharedObj = {};
 for (const key in dependencies) {
-  const version = Object.hasOwn(pkg.dependencies, key)
-    ? fse.readJsonSync(path.join(__dirname, 'node_modules', key, 'package.json')).version
-    : dependencies[key];
+  const sharedVersion = dependencies[key];
   sharedObj[key] = {
     /** 是否运行为单例 */
     singleton: true,
     /** host模式下必须为true，微应用为false */
     // eager: true,
     eager: true,
-    version: `${version}`,
+    version: `${sharedVersion}`,
   };
 }
 
@@ -55,7 +74,8 @@ export default (env = {}) => {
   const { entry = './index.js', platform = 'ios' } = env;
   const context = env.context || __dirname;
   // 获取Repack的resolve配置
-  const _options = Repack.getResolveOptions(platform);
+  // RN 0.88 的 setup-env 等入口通过 package exports 暴露，不能按旧磁盘路径解析。
+  const _options = Repack.getResolveOptions({ platform, enablePackageExports: true });
 
   // 解析微前端相关配置
   let mpOptions = {};
@@ -79,6 +99,11 @@ export default (env = {}) => {
     entry,
     resolve: {
       ..._options,
+      alias: {
+        ..._options.alias,
+        // 保持旧解析器选择 Cheerio browser 入口的行为，避免引入 Node 网络模块。
+        'cheerio$': cheerioBrowserEntry,
+      },
     },
     output: {
       // 默认输出路径，host模式下会被覆盖
@@ -94,7 +119,7 @@ export default (env = {}) => {
           type: 'javascript/auto',
         },
         // 处理静态资源（图片等），支持inline模式
-        ...Repack.getAssetTransformRules(!!mpOptions.extraChunksPath ?  {
+        ...Repack.getAssetTransformRules(mpOptions.extraChunksPath ?  {
           inline: !!mpOptions.extraChunksPath,
           svg: 'svgr',
         } : {
@@ -118,6 +143,7 @@ export default (env = {}) => {
       chunkIds: 'named', // 便于调试
     },
     plugins: [
+      new HtyfBuildValidationPlugin(),
       // 注入全局常量（appid、版本、构建时间）
       new webpack.DefinePlugin({
         __APP_DEFINE_APPID__: `"${appid}"`,
