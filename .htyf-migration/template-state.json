@@ -414,8 +414,8 @@
     "postinstallPatch": "pass",
     "unitTests": {
       "status": "pass",
-      "suites": 3,
-      "tests": 17
+      "suites": 5,
+      "tests": 22
     },
     "changedConfigurationLint": "pass",
     "fullLint": {
@@ -426,27 +426,29 @@
     },
     "typecheck": {
       "status": "failed",
-      "diagnostics": 138,
+      "diagnostics": 133,
       "scope": "business source diagnostics remain"
     },
     "invalidBuildExitCodeGuard": "pass",
     "ios": {
       "status": "pass",
       "artifact": "build/verification/ios/dist.dgz",
-      "packageBytes": 1709236,
-      "bundleBytes": 8348459,
-      "sha256": "d7d8e03bda0e23a6f2593eb63ab1c45bd2defa79a0f91106efa1a417602533d0",
+      "packageBytes": 1709331,
+      "bundleBytes": 8349014,
+      "sha256": "c62bfaa90eb923cf1f522a2fd262c2d45cfb34c63ebee8a1daccbad463d815ea",
       "warnings": 1,
-      "warning": "Reanimated jestUtils dynamic require"
+      "warning": "Reanimated jestUtils dynamic require",
+      "version": "0.0.66"
     },
     "android": {
       "status": "pass",
       "artifact": "build/verification/android/dist.dgz",
-      "packageBytes": 1710025,
-      "bundleBytes": 8354205,
-      "sha256": "4e958777b00843a57141f340a1f2a2e9e6bee474f7914bcb33e21cbe50b8e411",
+      "packageBytes": 1710133,
+      "bundleBytes": 8354760,
+      "sha256": "c6ddb6b5245dfea5746c6da62e843beca478938308c77da5cfd320fdfbb6e4a5",
       "warnings": 1,
-      "warning": "Reanimated jestUtils dynamic require"
+      "warning": "Reanimated jestUtils dynamic require",
+      "version": "0.0.66"
     },
     "shareQrPayload": "decoded and matches README share URL; public data matches final build config",
     "remoteConfigHttpStatus": 200,
@@ -454,5 +456,18 @@
     "sourcePreservation": "pass",
     "deviceHostAcceptance": "pending",
     "publication": "not performed"
-  }
+  },
+  "runtimeFixes": [
+    {
+      "date": "2026-11-05",
+      "version": "0.0.66",
+      "error": "Cannot read property 'runAfterInteractions' of undefined",
+      "cause": "Five application callers still used InteractionManager removed in RN 0.88.1.",
+      "adaptation": "runWhenIdle uses requestIdleCallback with a 100ms timeout or a timer fallback; awaits asynchronous task completion.",
+      "regression": "Real music-sheet storage call fails before fix and passes without InteractionManager after fix.",
+      "builtBundleScan": "No runAfterInteractions references in either platform bundle.",
+      "record": ".htyf-migration/runtime-fix-2026-11-05.md"
+    }
+  ],
+  "lastRuntimeFixDate": "2026-11-05"
 }

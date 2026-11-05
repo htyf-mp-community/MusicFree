@@ -5,12 +5,12 @@ MusicFree for the HTYF host, with plugin search, playback, lyrics and playlists.
 
 ## 预览、分享与使用 / Preview, Share and Use
 
-[打开分享页 / Open the share page](https://mp.dagouzhi.com/share?data=%7B%22type%22%3A%22app%22%2C%22version%22%3A%220.0.64%22%2C%22name%22%3A%22MusicFree%22%2C%22appid%22%3A%22plugin_music%22%2C%22rotate%22%3A%22portrait%22%2C%22appUrlConfig%22%3A%22https%3A%2F%2Fraw.githubusercontent.com%2Fhtyf-mp-community%2Fdemo%2Fmain%2Fv2%2Fplugin_music%2Flatest%2Fapp.json%22%2C%22zipUrl%22%3A%22https%3A%2F%2Fraw.githubusercontent.com%2Fhtyf-mp-community%2Fdemo%2Fmain%2Fv2%2Fplugin_music%2Flatest%2Fdist.dgz%22%2C%22projectname%22%3A%22MusicFree%22%2C%22engines%22%3A%222.0.0%22%7D) · 应用 ID / App ID: `plugin_music` · 版本 / Version: `0.0.64`
+[打开分享页 / Open the share page](https://mp.dagouzhi.com/share?data=%7B%22type%22%3A%22app%22%2C%22version%22%3A%220.0.66%22%2C%22name%22%3A%22MusicFree%22%2C%22appid%22%3A%22plugin_music%22%2C%22rotate%22%3A%22portrait%22%2C%22appUrlConfig%22%3A%22https%3A%2F%2Fraw.githubusercontent.com%2Fhtyf-mp-community%2Fdemo%2Fmain%2Fv2%2Fplugin_music%2Flatest%2Fapp.json%22%2C%22zipUrl%22%3A%22https%3A%2F%2Fraw.githubusercontent.com%2Fhtyf-mp-community%2Fdemo%2Fmain%2Fv2%2Fplugin_music%2Flatest%2Fdist.dgz%22%2C%22projectname%22%3A%22MusicFree%22%2C%22engines%22%3A%222.0.0%22%7D) · 应用 ID / App ID: `plugin_music` · 版本 / Version: `0.0.66`
 
 ![MusicFree 分享二维码 / MusicFree share QR code](docs/assets/htyf-share-qr.png)
 
-此入口需要红糖云服 App。线上配置与资源地址可访问，当前为旧构建；此次模板更新后的资源包尚未上传，扫码添加和打开的真机验证待完成。
-This entry requires the HTYF App. The online config and package are reachable and serve the previous build. The package from this template update has not been uploaded; device scan, add and open checks are pending.
+此入口需要红糖云服 App。线上配置与资源地址可访问，当前为旧构建；0.0.66 修复包尚未上传，扫码添加和打开的真机验证待完成。
+This entry requires the HTYF App. The online config and package are reachable and serve the previous build. The 0.0.66 fix package has not been uploaded; device scan, add and open checks are pending.
 
 1. 访问[红糖云服官网](https://mp.dagouzhi.com)，从下载入口安装并打开 App。
    Visit the [HTYF website](https://mp.dagouzhi.com), then download, install and open the App.
@@ -23,6 +23,9 @@ This entry requires the HTYF App. The online config and package are reachable an
 
 发布前，需将 `dist/app.json` 上传到 [appUrlConfig](https://raw.githubusercontent.com/htyf-mp-community/demo/main/v2/plugin_music/latest/app.json)，将 `dist/dist.dgz` 上传到 [zipUrl](https://raw.githubusercontent.com/htyf-mp-community/demo/main/v2/plugin_music/latest/dist.dgz)。打包不会自动上传文件。
 Before release, upload `dist/app.json` to [appUrlConfig](https://raw.githubusercontent.com/htyf-mp-community/demo/main/v2/plugin_music/latest/app.json) and `dist/dist.dgz` to [zipUrl](https://raw.githubusercontent.com/htyf-mp-community/demo/main/v2/plugin_music/latest/dist.dgz). Packaging does not upload these files.
+
+0.0.66 修复启动崩溃，见 [运行修复记录](.htyf-migration/runtime-fix-2026-11-05.md)。
+Version 0.0.66 fixes the startup crash; see the [runtime fix record](.htyf-migration/runtime-fix-2026-11-05.md).
 
 ## 开发与模板版本 / Development and Template Version
 

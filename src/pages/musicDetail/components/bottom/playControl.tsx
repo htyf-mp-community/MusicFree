@@ -1,5 +1,6 @@
 import React from 'react';
-import {InteractionManager, StyleSheet, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
+import runWhenIdle from '@/utils/runWhenIdle';
 import rpx from '@/utils/rpx';
 import repeatModeConst from '@/constants/repeatModeConst';
 
@@ -32,7 +33,7 @@ export default function () {
                     name={repeatModeConst[repeatMode].icon}
                     size={rpx(56)}
                     onPress={async () => {
-                        InteractionManager.runAfterInteractions(async () => {
+                        runWhenIdle(async () => {
                             await sleep(20);
                             TrackPlayer.toggleRepeatMode();
                         });

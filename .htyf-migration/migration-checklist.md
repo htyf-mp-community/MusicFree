@@ -35,8 +35,8 @@ until all items below pass validation.
 - [ ] Audit every dialog, panel, menu and toast for in-tree overlay ownership and back dismissal.
 - [ ] Review exported API documentation and replace vague TODO comments.
 - [ ] Run typecheck, lint, unit tests and device-level acceptance checks.
-  After the template update, unit tests pass (17/17) and the changed build/lint
-  configuration passes ESLint. Full TypeScript validation reports 138 errors,
+  After the startup compatibility fix, unit tests pass (22/22) and the changed
+  scheduling utility/tests pass ESLint. Full TypeScript validation reports 133 errors,
   and full ESLint reports 84 errors, so this item remains open. See
   [template-update.md](template-update.md) for build evidence and remaining checks.
 
@@ -56,3 +56,11 @@ See [template-update.md](template-update.md) for the version changes, preserved
 application files, verification results and remaining host/native checks.
 This template update does not complete the feature inventory or advance its
 source migration baseline.
+
+## Startup runtime fix: 2026-11-05
+
+Removed five application calls to the deleted React Native InteractionManager
+API. The real startup sheet-storage regression now passes without that API.
+See [runtime-fix-2026-11-05.md](runtime-fix-2026-11-05.md) for the reproduced
+error, 0.0.66 scheduling adaptation, tests and build evidence. Device acceptance
+still requires loading the rebuilt package in the HTYF host.

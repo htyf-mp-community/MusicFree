@@ -1,6 +1,6 @@
 import getOrCreateMMKV from '@/utils/getOrCreateMMKV.ts';
 import safeParse from '@/utils/safeParse.ts';
-import {InteractionManager} from 'react-native';
+import runWhenIdle from '@/utils/runWhenIdle';
 import safeStringify from '@/utils/safeStringify.ts';
 import {SortType} from '@/constants/commonConst.ts';
 
@@ -11,7 +11,7 @@ function getStorageBase(key: string) {
 }
 
 async function setStorageBase(key: string, value: any) {
-    return InteractionManager.runAfterInteractions(() => {
+    return runWhenIdle(() => {
         const mmkv = getOrCreateMMKV(`LocalSheet.${key}`);
         mmkv.set('data', safeStringify(value));
     });

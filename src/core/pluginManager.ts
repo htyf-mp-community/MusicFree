@@ -14,7 +14,8 @@ import axios from "axios";
 import bigInt from "big-integer";
 import qs from "qs";
 import * as webdav from "webdav";
-import { InteractionManager, ToastAndroid } from "react-native";
+import { ToastAndroid } from "react-native";
+import runWhenIdle from "@/utils/runWhenIdle";
 import pathConst from "@/constants/pathConst";
 import { compare, satisfies } from "compare-versions";
 import DeviceInfo from "react-native-device-info";
@@ -1458,7 +1459,7 @@ function useSortedPlugins() {
     );
 
     useEffect(() => {
-        InteractionManager.runAfterInteractions(() => {
+        runWhenIdle(() => {
             setSortedPlugins(
                 [..._plugins].sort((a, b) =>
                     (_pluginMetaAll[a.name]?.order ?? Infinity) -

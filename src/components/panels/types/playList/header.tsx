@@ -1,5 +1,6 @@
 import React from 'react';
-import {InteractionManager, StyleSheet, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
+import runWhenIdle from '@/utils/runWhenIdle';
 import rpx from '@/utils/rpx';
 import ThemeText from '@/components/base/themeText';
 import repeatModeConst from '@/constants/repeatModeConst';
@@ -25,7 +26,7 @@ export default function Header() {
             </ThemeText>
             <IconTextButton
                 onPress={() => {
-                    InteractionManager.runAfterInteractions(async () => {
+                    runWhenIdle(async () => {
                         await sleep(20);
                         TrackPlayer.toggleRepeatMode();
                     });

@@ -7,7 +7,7 @@ import { getQualityOrder } from "@/utils/qualities";
 import StateMapper from "@/utils/stateMapper";
 import Toast from "@/utils/toast";
 import { produce } from "immer";
-import { InteractionManager } from "react-native";
+import runWhenIdle from "@/utils/runWhenIdle";
 import { copyFile, downloadFile, exists, unlink } from '@dr.pogodin/react-native-fs';
 
 import Config from "./config.ts";
@@ -353,7 +353,7 @@ async function downloadNext() {
 }
 
 async function downloadNextAfterInteraction() {
-    InteractionManager.runAfterInteractions(downloadNext);
+    runWhenIdle(downloadNext);
 }
 
 /** 加入下载队列 */

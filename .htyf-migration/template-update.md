@@ -1,5 +1,8 @@
 # HTYF 官方模板更新（2026-11-03）
 
+以下为模板升级当时的记录。2026-11-05 的 0.0.66 启动修复、最新测试与产物状态见
+[运行修复记录](runtime-fix-2026-11-05.md)。
+
 源项目：`/Users/dgz/code/github/MusicFree`；默认更新目标：
 `/Users/dgz/code/github/MusicFree/HTYF`，应用类型为直接 React Native 应用。
 官方来源：[htyf-cli main@8c6fc84](https://github.com/htyf-mp-community/htyf-cli/commit/8c6fc84077470bee05af97d6cf04682a0977c210)，
